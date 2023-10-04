@@ -2984,7 +2984,7 @@ var addFunctionsToContract = function (contract) {
     contract.abi.filter(function (json) {
         return json.type === 'function';
     }).map(function (json) {
-        return new SolidityFunction(contract._klay, json, contract.address);
+        return new SolidityFunction(contract._vini, json, contract.address);
     }).forEach(function (f) {
         f.attachToContract(contract);
     });
@@ -3002,11 +3002,11 @@ var addEventsToContract = function (contract) {
         return json.type === 'event';
     });
 
-    var All = new AllEvents(contract._klay._requestManager, events, contract.address);
+    var All = new AllEvents(contract._vini._requestManager, events, contract.address);
     All.attachToContract(contract);
 
     events.map(function (json) {
-        return new SolidityEvent(contract._klay._requestManager, json, contract.address);
+        return new SolidityEvent(contract._vini._requestManager, json, contract.address);
     }).forEach(function (e) {
         e.attachToContract(contract);
     });
@@ -3026,7 +3026,7 @@ var checkForContractAddress = function(contract, callback){
         callbackFired = false;
 
     // wait for receipt
-    var filter = contract._klay.filter('latest', function(e){
+    var filter = contract._vini.filter('latest', function(e){
         if (!e && !callbackFired) {
             count++;
 
@@ -3044,10 +3044,10 @@ var checkForContractAddress = function(contract, callback){
 
             } else {
 
-                contract._klay.getTransactionReceipt(contract.transactionHash, function(e, receipt){
+                contract._vini.getTransactionReceipt(contract.transactionHash, function(e, receipt){
                     if(receipt && !callbackFired) {
 
-                        contract._klay.getCode(receipt.contractAddress, function(e, code){
+                        contract._vini.getCode(receipt.contractAddress, function(e, code){
                             /*jshint maxcomplexity: 6 */
 
                             if(callbackFired || !code)
@@ -3229,7 +3229,7 @@ ContractFactory.prototype.getData = function () {
  * @param {Address} contract address
  */
 var Contract = function (vini, abi, address) {
-    this._klay = vini;
+    this._vini = vini;
     this.transactionHash = null;
     this.address = address;
     this.abi = abi;
@@ -4137,7 +4137,7 @@ var sha3 = require('../utils/sha3');
  * This prototype should be used to call/sendTransaction to solidity functions
  */
 var SolidityFunction = function (vini, json, address) {
-    this._klay = vini;
+    this._vini = vini;
     this._inputTypes = json.inputs.map(function (i) {
         return i.type;
     });
@@ -4239,12 +4239,12 @@ SolidityFunction.prototype.call = function () {
 
 
     if (!callback) {
-        var output = this._klay.call(payload, defaultBlock);
+        var output = this._vini.call(payload, defaultBlock);
         return this.unpackOutput(output);
     }
 
     var self = this;
-    this._klay.call(payload, defaultBlock, function (error, output) {
+    this._vini.call(payload, defaultBlock, function (error, output) {
         if (error) return callback(error, null);
 
         var unpacked = null;
@@ -4274,10 +4274,10 @@ SolidityFunction.prototype.sendTransaction = function () {
     }
 
     if (!callback) {
-        return this._klay.sendTransaction(payload);
+        return this._vini.sendTransaction(payload);
     }
 
-    this._klay.sendTransaction(payload, callback);
+    this._vini.sendTransaction(payload, callback);
 };
 
 /**
@@ -4291,10 +4291,10 @@ SolidityFunction.prototype.estimateGas = function () {
     var payload = this.toPayload(args);
 
     if (!callback) {
-        return this._klay.estimateGas(payload);
+        return this._vini.estimateGas(payload);
     }
 
-    this._klay.estimateGas(payload, callback);
+    this._vini.estimateGas(payload, callback);
 };
 
 /**

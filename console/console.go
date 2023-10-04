@@ -58,7 +58,7 @@ const DefaultPrompt = "> "
 type Config struct {
 	DataDir  string       // Data directory to store the console history at
 	DocRoot  string       // Filesystem path from where to load JavaScript files from
-	Client   *rpc.Client  // RPC client to execute Klaytn requests through
+	Client   *rpc.Client  // RPC client to execute Vinitn requests through
 	Prompt   string       // Input prompt prefix string (defaults to DefaultPrompt)
 	Prompter UserPrompter // Input prompter to allow interactive user feedback (defaults to TerminalPrompter)
 	Printer  io.Writer    // Output writer to serialize any display strings to (defaults to os.Stdout)
@@ -69,7 +69,7 @@ type Config struct {
 // JavaScript console attached to a running node via an external or in-process RPC
 // client.
 type Console struct {
-	client   *rpc.Client  // RPC client to execute Klaytn requests through
+	client   *rpc.Client  // RPC client to execute Vinitn requests through
 	jsre     *jsre.JSRE   // JavaScript runtime environment running the interpreter
 	prompt   string       // Input prompt prefix string
 	prompter UserPrompter // Input prompter to allow interactive user feedback
@@ -140,7 +140,7 @@ func (c *Console) init(preload []string) error {
 	if err != nil {
 		return fmt.Errorf("api modules: %v", err)
 	}
-	flatten := "var klay = web3.klay; var personal = web3.personal; var eth = web3.eth; "
+	flatten := "var vini = web3.vini; var personal = web3.personal; var eth = web3.eth; "
 	for api := range apis {
 		if api == "web3" {
 			continue // manually mapped or ignore
@@ -160,7 +160,7 @@ func (c *Console) init(preload []string) error {
 		return fmt.Errorf("namespace flattening: %v", err)
 	}
 	// Initialize the global name register (disabled for now)
-	// c.jsre.Run(`var GlobalRegistrar = klay.contract(` + registrar.GlobalRegistrarAbi + `);   registrar = GlobalRegistrar.at("` + registrar.GlobalRegistrarAddr + `");`)
+	// c.jsre.Run(`var GlobalRegistrar = vini.contract(` + registrar.GlobalRegistrarAbi + `);   registrar = GlobalRegistrar.at("` + registrar.GlobalRegistrarAddr + `");`)
 
 	// If the console is in interactive mode, instrument password related methods to query the user
 	if c.prompter != nil {
@@ -276,7 +276,7 @@ func (c *Console) AutoCompleteInput(line string, pos int) (string, []string, str
 		return "", nil, ""
 	}
 	// Chunk data to relevant part for autocompletion
-	// E.g. in case of nested lines klay.getBalance(klay.coinb<tab><tab>
+	// E.g. in case of nested lines vini.getBalance(vini.coinb<tab><tab>
 	start := pos - 1
 	for ; start > 0; start-- {
 		// Skip all methods and namespaces (i.e. including the dot)
@@ -298,8 +298,8 @@ func (c *Console) AutoCompleteInput(line string, pos int) (string, []string, str
 // Welcome show summary of current node instance and some metadata about the
 // console's available modules.
 func (c *Console) Welcome() {
-	// Print some generic Klaytn metadata
-	fmt.Fprintf(c.printer, "Welcome to the Klaytn JavaScript console!\n\n")
+	// Print some generic Vinitn metadata
+	fmt.Fprintf(c.printer, "Welcome to the Vinitn JavaScript console!\n\n")
 	c.jsre.Run(`
 		console.log("instance: " + web3.version.node);
 		console.log(" datadir: " + admin.datadir);
