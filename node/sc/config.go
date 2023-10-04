@@ -113,9 +113,9 @@ type SCConfig struct {
 // NodeName returns the devp2p node identifier.
 func (c *SCConfig) NodeName() string {
 	name := c.name()
-	// Backwards compatibility: previous versions used title-cased "Klaytn", keep that.
-	if name == "klay" || name == "klay-testnet" {
-		name = "Klaytn"
+	// Backwards compatibility: previous versions used title-cased "Vinitn", keep that.
+	if name == "vini" || name == "vini-testnet" {
+		name = "Vinitn"
 	}
 	name += "/" + runtime.GOOS + "-" + runtime.GOARCH
 	name += "/" + runtime.Version()

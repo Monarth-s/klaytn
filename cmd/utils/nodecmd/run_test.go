@@ -163,7 +163,7 @@ func runKlay(t *testing.T, name string, args ...string) *testklay {
 		}()
 	}
 
-	// Boot "klay". This actually runs the test binary but the TestMain
+	// Boot "vini". This actually runs the test binary but the TestMain
 	// function will prevent any tests from running.
 	tt.Run(name, args...)
 

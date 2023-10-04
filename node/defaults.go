@@ -76,7 +76,7 @@ func DefaultDataDir() string {
 	// Try to place the data folder in the user's home dir
 	dirname := filepath.Base(os.Args[0])
 	if dirname == "" {
-		dirname = "klay"
+		dirname = "vini"
 	}
 	home := homeDir()
 	if home != "" {

@@ -35,7 +35,7 @@ const (
 )
 
 var KlayProtocol = Protocol{
-	Name:     "klay",
+	Name:     "vini",
 	Versions: []uint{Klay65, Klay64, Klay63, Klay62},
 	Lengths:  []uint64{21, 19, 17, 8},
 }

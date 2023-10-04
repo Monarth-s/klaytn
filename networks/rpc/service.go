@@ -107,7 +107,7 @@ func (r *serviceRegistry) callback(method string) *callback {
 	// when NonEthCompatible is true, the return formatting for the eth namespace API provided for Ethereum compatibility is disabled.
 	// convert ethereum namespace to klay namespace.
 	if NonEthCompatible && elem[0] == "eth" {
-		return r.services["klay"].callbacks[elem[1]]
+		return r.services["vini"].callbacks[elem[1]]
 	}
 	return r.services[elem[0]].callbacks[elem[1]]
 }

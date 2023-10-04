@@ -415,7 +415,7 @@ func (c *Client) Notify(ctx context.Context, method string, args ...interface{})
 
 // KlaySubscribe registers a subscripion under the "vini" namespace.
 func (c *Client) KlaySubscribe(ctx context.Context, channel interface{}, args ...interface{}) (*ClientSubscription, error) {
-	return c.Subscribe(ctx, "klay", channel, args...)
+	return c.Subscribe(ctx, "vini", channel, args...)
 }
 
 // ShhSubscribe registers a subscripion under the "shh" namespace.

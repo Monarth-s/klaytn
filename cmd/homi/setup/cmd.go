@@ -632,7 +632,7 @@ func Gen(ctx *cli.Context) error {
 		path := strings.ToLower(ctx.String(mnemonicPath.Name))
 		if !strings.HasPrefix(path, "m") {
 			switch path {
-			case "klay":
+			case "vini":
 				path = "m/44'/8217'/0'/0/"
 			case "eth":
 				path = "m/44'/60'/0'/0/"

@@ -46,19 +46,19 @@ var (
 	// Files that end up in the klay*.zip archive.
 	klayArchiveFiles = []string{
 		"COPYING",
-		executablePath("klay"),
+		executablePath("vini"),
 	}
 
 	// Files that end up in the klay-alltools*.zip archive.
 	allToolsArchiveFiles = []string{
 		"COPYING",
-		executablePath("klay"),
+		executablePath("vini"),
 	}
 
 	// A debian package is created for all executables listed here.
 	debExecutables = []debExecutable{
 		{
-			Name:        "klay",
+			Name:        "vini",
 			Description: "Klaytn CLI client.",
 		},
 	}

@@ -272,9 +272,9 @@ func DefaultGRPCEndpoint() string {
 // NodeName returns the devp2p node identifier.
 func (c *Config) NodeName() string {
 	name := c.name()
-	// Backwards compatibility: previous versions used title-cased "Klaytn", keep that.
-	if name == "klay" || name == "klay-testnet" {
-		name = "Klaytn"
+	// Backwards compatibility: previous versions used title-cased "Vinit", keep that.
+	if name == "vini" || name == "vini-testnet" {
+		name = "Vinitn"
 	}
 	if c.UserIdent != "" {
 		name += "/" + c.UserIdent
@@ -314,9 +314,9 @@ func (c *Config) ResolvePath(path string) string {
 	if c.DataDir == "" {
 		return ""
 	}
-	if c.name() == "klay" && isKlaytnResource[path] {
+	if c.name() == "vini" && isKlaytnResource[path] {
 		oldpath := ""
-		if c.Name == "klay" {
+		if c.Name == "vini" {
 			oldpath = filepath.Join(c.DataDir, path)
 		}
 		if c.ChainDataDir != "" && path == "chaindata" {

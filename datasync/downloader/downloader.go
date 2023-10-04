@@ -481,7 +481,7 @@ func (d *Downloader) syncWithPeer(p *peerConnection, hash common.Hash, td *big.I
 	}
 	mode := d.getMode()
 
-	logger.Debug("Synchronising with the network", "peer", p.id, "klay", p.version, "head", hash, "td", td, "mode", mode)
+	logger.Debug("Synchronising with the network", "peer", p.id, "vini", p.version, "head", hash, "td", td, "mode", mode)
 	defer func(start time.Time) {
 		logger.Debug("Synchronisation terminated", "elapsed", time.Since(start))
 	}(time.Now())

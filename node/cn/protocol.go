@@ -45,7 +45,7 @@ const (
 )
 
 // ProtocolName is the official short name of the protocol used during capability negotiation.
-var ProtocolName = "klay"
+var ProtocolName = "vini"
 
 // ProtocolVersions are the upported versions of the klay protocol (first is primary).
 var ProtocolVersions = []uint{klay65, klay64, klay63, klay62}

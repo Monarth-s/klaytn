@@ -124,7 +124,7 @@ func TestNotifications(t *testing.T) {
 	server := NewServer()
 	service := &NotificationTestService{unsubscribed: make(chan string)}
 
-	if err := server.RegisterName("klay", service); err != nil {
+	if err := server.RegisterName("vini", service); err != nil {
 		t.Fatalf("unable to register test service %v", err)
 	}
 
@@ -248,7 +248,7 @@ func TestSubscriptionMultipleNamespaces(t *testing.T) {
 	}()
 
 	var (
-		namespaces        = []string{"klay", "shh", "bzz"}
+		namespaces        = []string{"vini", "shh", "bzz"}
 		service           = NotificationTestService{}
 		subCount          = len(namespaces) * 2
 		notificationCount = 3

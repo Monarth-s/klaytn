@@ -407,7 +407,7 @@ var flagsWithValues = []struct {
 	{
 		flag:        "--rpcapi",
 		flagType:    FlagTypeArgument,
-		values:      []string{"", "klay", "klay,personal,istanbul,debug,miner"},
+		values:      []string{"", "vini", "vini,personal,istanbul,debug,miner"},
 		wrongValues: commonThreeErrors,
 		errors:      []int{NonError, NonError, NonError},
 	},
@@ -458,7 +458,7 @@ var flagsWithValues = []struct {
 	{
 		flag:        "--wsapi",
 		flagType:    FlagTypeArgument,
-		values:      []string{"", "klay", "klay,personal,istanbul,debug,miner"},
+		values:      []string{"", "vini", "vini,personal,istanbul,debug,miner"},
 		wrongValues: commonThreeErrors,
 		errors:      []int{NonError, NonError, NonError},
 	},
@@ -472,7 +472,7 @@ var flagsWithValues = []struct {
 	{
 		flag:        "--exec",
 		flagType:    FlagTypeArgument,
-		values:      []string{"klay.blockNumber", "klat.getBlock(0)", "governance.getParams()[\"reward.proposerupdateinterval\"]"},
+		values:      []string{"vini.blockNumber", "klat.getBlock(0)", "governance.getParams()[\"reward.proposerupdateinterval\"]"},
 		wrongValues: commonThreeErrors,
 		errors:      []int{NonError, NonError, NonError},
 	},

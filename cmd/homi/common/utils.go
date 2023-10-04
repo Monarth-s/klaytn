@@ -38,7 +38,7 @@ import (
 
 const (
 	defaultLocalDir  = "/tmp/kdata"
-	clientIdentifier = "klay"
+	clientIdentifier = "vini"
 )
 
 var logger = log.NewModuleLogger(log.CMDIstanbul)
