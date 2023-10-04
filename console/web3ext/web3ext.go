@@ -825,7 +825,7 @@ var blockWithConsensusInfoCall = function (args) {
 };
 
 web3._extend({
-	property: 'klay',
+	property: 'vini',
 	methods: [
 		new web3._extend.Method({
 			name: 'clientVersion',
