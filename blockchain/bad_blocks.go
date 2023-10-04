@@ -20,7 +20,7 @@
 
 package blockchain
 
-import "github.com/klaytn/klaytn/common"
+import "github.com/Monarth-s/klaytn/common"
 
 // BadHashes represent a set of manually tracked bad hashes (usually hard forks)
 var BadHashes = map[common.Hash]bool{

@@ -20,7 +20,7 @@ import (
 	"errors"
 	"sync/atomic"
 
-	"github.com/klaytn/klaytn/datasync/chaindatafetcher/types"
+	"github.com/Monarth-s/klaytn/datasync/chaindatafetcher/types"
 )
 
 type PublicChainDataFetcherAPI struct {

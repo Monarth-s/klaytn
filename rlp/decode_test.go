@@ -31,7 +31,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/klaytn/klaytn/common/math"
+	"github.com/Monarth-s/klaytn/common/math"
 )
 
 func TestStreamKind(t *testing.T) {

@@ -17,7 +17,7 @@
 package dbsyncer
 
 import (
-	"github.com/klaytn/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/blockchain/types"
 )
 
 type MakeQueryRequest struct {

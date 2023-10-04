@@ -23,9 +23,9 @@ package vm
 import (
 	"errors"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/common/math"
-	"github.com/klaytn/klaytn/params"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/common/math"
+	"github.com/Monarth-s/klaytn/params"
 )
 
 // memoryGasCost calculates the quadratic gas for memory expansion. It does so

@@ -23,7 +23,7 @@ package snap
 import (
 	"testing"
 
-	"github.com/klaytn/klaytn/common"
+	"github.com/Monarth-s/klaytn/common"
 )
 
 // Tests that given a starting hash and a density, the hash ranger can correctly

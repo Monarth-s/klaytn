@@ -19,7 +19,7 @@ package blst
 import (
 	"crypto/rand"
 
-	"github.com/klaytn/klaytn/crypto/bls/types"
+	"github.com/Monarth-s/klaytn/crypto/bls/types"
 	blst "github.com/supranational/blst/bindings/go"
 )
 

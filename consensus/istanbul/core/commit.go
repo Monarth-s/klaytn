@@ -21,8 +21,8 @@
 package core
 
 import (
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/consensus/istanbul"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/consensus/istanbul"
 )
 
 func (c *core) sendCommit() {

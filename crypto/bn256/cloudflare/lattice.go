@@ -8,7 +8,7 @@ package bn256
 import (
 	"math/big"
 
-	"github.com/klaytn/klaytn/common"
+	"github.com/Monarth-s/klaytn/common"
 )
 
 var half = new(big.Int).Rsh(Order, 1)

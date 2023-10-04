@@ -27,9 +27,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/consensus"
-	"github.com/klaytn/klaytn/consensus/gxhash"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/consensus"
+	"github.com/Monarth-s/klaytn/consensus/gxhash"
 )
 
 type hashrate struct {

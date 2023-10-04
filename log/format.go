@@ -29,7 +29,7 @@ const (
 
 // locationTrims are trimmed for display to avoid unwieldy log lines.
 var locationTrims = []string{
-	"github.com/klaytn/klaytn/",
+	"github.com/Monarth-s/klaytn/",
 }
 
 // PrintOrigins sets or unsets log location (file:line) printing for terminal

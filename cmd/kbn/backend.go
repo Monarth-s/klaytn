@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/klaytn/klaytn/networks/p2p/discover"
-	"github.com/klaytn/klaytn/networks/rpc"
+	"github.com/Monarth-s/klaytn/networks/p2p/discover"
+	"github.com/Monarth-s/klaytn/networks/rpc"
 )
 
 type BN struct {

@@ -20,7 +20,7 @@
 
 package bind
 
-import "github.com/klaytn/klaytn/accounts/abi"
+import "github.com/Monarth-s/klaytn/accounts/abi"
 
 // tmplData is the data structure required to fill the binding template.
 type tmplData struct {
@@ -97,11 +97,11 @@ import (
 	"strings"
 	"errors"
 
-	"github.com/klaytn/klaytn"
-	"github.com/klaytn/klaytn/accounts/abi/bind"
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/blockchain/types"
-	"github.com/klaytn/klaytn/event"
+	"github.com/Monarth-s/klaytn"
+	"github.com/Monarth-s/klaytn/accounts/abi/bind"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/event"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

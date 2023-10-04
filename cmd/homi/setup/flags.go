@@ -18,7 +18,7 @@
 package setup
 
 import (
-	"github.com/klaytn/klaytn/params"
+	"github.com/Monarth-s/klaytn/params"
 	"github.com/urfave/cli/v2"
 )
 

@@ -21,9 +21,9 @@
 package core
 
 import (
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/common/prque"
-	"github.com/klaytn/klaytn/consensus/istanbul"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/common/prque"
+	"github.com/Monarth-s/klaytn/consensus/istanbul"
 )
 
 // msgPriority is defined for calculating processing priority to speedup consensus

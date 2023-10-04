@@ -19,8 +19,8 @@ package blst
 import (
 	"testing"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/crypto/bls/types"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/crypto/bls/types"
 	"github.com/stretchr/testify/assert"
 )
 

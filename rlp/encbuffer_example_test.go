@@ -24,7 +24,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/klaytn/klaytn/rlp"
+	"github.com/Monarth-s/klaytn/rlp"
 )
 
 func ExampleEncoderBuffer() {

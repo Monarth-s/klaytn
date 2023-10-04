@@ -26,7 +26,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/klaytn/klaytn/rlp/internal/rlpstruct"
+	"github.com/Monarth-s/klaytn/rlp/internal/rlpstruct"
 )
 
 // typeinfo is an entry in the type cache.

@@ -21,8 +21,8 @@
 package sc
 
 import (
-	metricutils "github.com/klaytn/klaytn/metrics/utils"
-	"github.com/klaytn/klaytn/networks/p2p"
+	metricutils "github.com/Monarth-s/klaytn/metrics/utils"
+	"github.com/Monarth-s/klaytn/networks/p2p"
 	"github.com/rcrowley/go-metrics"
 )
 

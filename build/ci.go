@@ -38,7 +38,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/klaytn/klaytn/utils/build"
+	"github.com/Monarth-s/klaytn/utils/build"
 )
 
 var (
@@ -202,10 +202,10 @@ func buildFlags(env build.Environment) (flags []string) {
 	var ld []string
 	if env.Commit != "" {
 		ld = append(ld, "-X", "main.gitCommit="+env.Commit)
-		ld = append(ld, "-X", "github.com/klaytn/klaytn/cmd/utils/nodecmd.gitCommit="+env.Commit)
+		ld = append(ld, "-X", "github.com/Monarth-s/klaytn/cmd/utils/nodecmd.gitCommit="+env.Commit)
 	}
 	if env.Tag != "" {
-		ld = append(ld, "-X", "github.com/klaytn/klaytn/cmd/utils/nodecmd.gitTag="+env.Tag)
+		ld = append(ld, "-X", "github.com/Monarth-s/klaytn/cmd/utils/nodecmd.gitTag="+env.Tag)
 	}
 	if runtime.GOOS == "darwin" {
 		ld = append(ld, "-s")
@@ -805,7 +805,7 @@ func doAndroidArchive(cmdline []string) {
 	// Build the Android archive and Maven resources
 	build.MustRun(goTool("get", "golang.org/x/mobile/cmd/gomobile", "golang.org/x/mobile/cmd/gobind"))
 	build.MustRun(gomobileTool("init", "--ndk", os.Getenv("ANDROID_NDK")))
-	build.MustRun(gomobileTool("bind", "-ldflags", "-s -w", "--target", "android", "--javapkg", "org.klaytn", "-v", "github.com/klaytn/klaytn/mobile"))
+	build.MustRun(gomobileTool("bind", "-ldflags", "-s -w", "--target", "android", "--javapkg", "org.klaytn", "-v", "github.com/Monarth-s/klaytn/mobile"))
 
 	if *local {
 		// If we're building locally, copy bundle to build dir and skip Maven
@@ -931,7 +931,7 @@ func doXCodeFramework(cmdline []string) {
 	// Build the iOS XCode framework
 	build.MustRun(goTool("get", "golang.org/x/mobile/cmd/gomobile", "golang.org/x/mobile/cmd/gobind"))
 	build.MustRun(gomobileTool("init"))
-	bind := gomobileTool("bind", "-ldflags", "-s -w", "--target", "ios", "-v", "github.com/klaytn/klaytn/mobile")
+	bind := gomobileTool("bind", "-ldflags", "-s -w", "--target", "ios", "-v", "github.com/Monarth-s/klaytn/mobile")
 
 	if *local {
 		// If we're building locally, use the build folder and stop afterwards

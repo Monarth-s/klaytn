@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/klaytn/klaytn/blockchain/types"
-	"github.com/klaytn/klaytn/blockchain/vm"
+	"github.com/Monarth-s/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/blockchain/vm"
 	"github.com/stretchr/testify/assert"
 )
 

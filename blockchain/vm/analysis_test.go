@@ -23,7 +23,7 @@ package vm
 import (
 	"testing"
 
-	"github.com/klaytn/klaytn/crypto"
+	"github.com/Monarth-s/klaytn/crypto"
 )
 
 func TestJumpDestAnalysis(t *testing.T) {

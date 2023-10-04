@@ -3,9 +3,9 @@ package sc
 import (
 	"math/big"
 
-	"github.com/klaytn/klaytn/blockchain/types"
-	"github.com/klaytn/klaytn/common"
-	bridgecontract "github.com/klaytn/klaytn/contracts/bridge"
+	"github.com/Monarth-s/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/common"
+	bridgecontract "github.com/Monarth-s/klaytn/contracts/bridge"
 )
 
 type IRequestValueTransferEvent interface {

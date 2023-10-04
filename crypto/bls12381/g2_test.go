@@ -6,7 +6,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/klaytn/klaytn/common"
+	"github.com/Monarth-s/klaytn/common"
 )
 
 func (g *G2) one() *PointG2 {

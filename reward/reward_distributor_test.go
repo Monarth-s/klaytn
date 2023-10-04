@@ -22,10 +22,10 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/klaytn/klaytn/blockchain/types"
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/consensus/istanbul"
-	"github.com/klaytn/klaytn/params"
+	"github.com/Monarth-s/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/consensus/istanbul"
+	"github.com/Monarth-s/klaytn/params"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -473,7 +473,7 @@ func TestRewardDistributor_CalcDeferredRewardSimple(t *testing.T) {
 
 // Before Kore, there was a bug that distributed txFee at the end of
 // block processing regardless of `deferredTxFee` flag.
-// See https://github.com/klaytn/klaytn/issues/1692.
+// See https://github.com/Monarth-s/klaytn/issues/1692.
 // To maintain backward compatibility, we only fix the buggy logic after Magma
 // and leave the buggy logic before Kore.
 func TestRewardDistributor_CalcDeferredRewardSimple_nodeferred(t *testing.T) {

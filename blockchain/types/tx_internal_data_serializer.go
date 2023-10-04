@@ -20,7 +20,7 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/klaytn/klaytn/rlp"
+	"github.com/Monarth-s/klaytn/rlp"
 )
 
 // TxInternalDataSerializer serializes an object that implements `TxInternalData`.

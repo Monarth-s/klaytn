@@ -32,10 +32,10 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/klaytn/klaytn/networks/rpc"
+	"github.com/Monarth-s/klaytn/networks/rpc"
 
-	"github.com/klaytn/klaytn/console/jsre"
-	"github.com/klaytn/klaytn/console/web3ext"
+	"github.com/Monarth-s/klaytn/console/jsre"
+	"github.com/Monarth-s/klaytn/console/web3ext"
 	"github.com/mattn/go-colorable"
 	"github.com/peterh/liner"
 	"github.com/robertkrimen/otto"

@@ -1,7 +1,7 @@
 # Global ARGs
 ARG DOCKER_BASE_IMAGE=klaytn/build_base:latest
 ARG PKG_DIR=/klaytn-docker-pkg
-ARG SRC_DIR=/go/src/github.com/klaytn/klaytn
+ARG SRC_DIR=/go/src/github.com/Monarth-s/klaytn
 
 FROM ${DOCKER_BASE_IMAGE} AS builder
 LABEL maintainer="Tony Lee <tony.jm@krustuniverse.com>"

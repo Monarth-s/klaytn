@@ -21,7 +21,7 @@
 package core
 
 import (
-	"github.com/klaytn/klaytn/consensus/istanbul"
+	"github.com/Monarth-s/klaytn/consensus/istanbul"
 )
 
 func (c *core) sendPrepare() {

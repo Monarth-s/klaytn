@@ -21,8 +21,8 @@
 package api
 
 import (
-	"github.com/klaytn/klaytn/accounts"
-	"github.com/klaytn/klaytn/common"
+	"github.com/Monarth-s/klaytn/accounts"
+	"github.com/Monarth-s/klaytn/common"
 )
 
 // PublicAccountAPI provides an API to access accounts managed by this node.

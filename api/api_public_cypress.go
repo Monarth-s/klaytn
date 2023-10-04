@@ -21,9 +21,9 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/klaytn/klaytn/accounts/abi"
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/networks/rpc"
+	"github.com/Monarth-s/klaytn/accounts/abi"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/networks/rpc"
 )
 
 // cypressCreditABI is the input ABI used to generate the binding from.

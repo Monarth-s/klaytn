@@ -24,8 +24,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/klaytn/klaytn/networks/rpc"
-	"github.com/klaytn/klaytn/rlp"
+	"github.com/Monarth-s/klaytn/networks/rpc"
+	"github.com/Monarth-s/klaytn/rlp"
 )
 
 // PublicDebugAPI is the collection of Klaytn APIs exposed over the public

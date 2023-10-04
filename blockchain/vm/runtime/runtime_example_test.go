@@ -23,8 +23,8 @@ package runtime_test
 import (
 	"fmt"
 
-	"github.com/klaytn/klaytn/blockchain/vm/runtime"
-	"github.com/klaytn/klaytn/common"
+	"github.com/Monarth-s/klaytn/blockchain/vm/runtime"
+	"github.com/Monarth-s/klaytn/common"
 )
 
 func ExampleExecute() {

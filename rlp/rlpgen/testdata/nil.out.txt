@@ -1,6 +1,6 @@
 package test
 
-import "github.com/klaytn/klaytn/rlp"
+import "github.com/Monarth-s/klaytn/rlp"
 import "io"
 
 func (obj *Test) EncodeRLP(_w io.Writer) error {

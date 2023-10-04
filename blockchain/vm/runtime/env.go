@@ -21,8 +21,8 @@
 package runtime
 
 import (
-	"github.com/klaytn/klaytn/blockchain"
-	"github.com/klaytn/klaytn/blockchain/vm"
+	"github.com/Monarth-s/klaytn/blockchain"
+	"github.com/Monarth-s/klaytn/blockchain/vm"
 )
 
 func NewEnv(cfg *Config) *vm.EVM {

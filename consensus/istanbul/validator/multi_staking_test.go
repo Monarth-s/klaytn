@@ -37,9 +37,9 @@ package validator
 import (
 	"testing"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/consensus/istanbul"
-	"github.com/klaytn/klaytn/reward"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/consensus/istanbul"
+	"github.com/Monarth-s/klaytn/reward"
 	"github.com/stretchr/testify/assert"
 )
 

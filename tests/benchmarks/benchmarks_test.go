@@ -19,7 +19,7 @@ package benchmarks
 import (
 	"testing"
 
-	"github.com/klaytn/klaytn/common"
+	"github.com/Monarth-s/klaytn/common"
 )
 
 func TestInterpreterMload100000(t *testing.T) {

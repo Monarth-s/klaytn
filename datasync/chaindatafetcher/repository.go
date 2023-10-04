@@ -19,8 +19,8 @@ package chaindatafetcher
 import (
 	"time"
 
-	"github.com/klaytn/klaytn/blockchain"
-	"github.com/klaytn/klaytn/datasync/chaindatafetcher/types"
+	"github.com/Monarth-s/klaytn/blockchain"
+	"github.com/Monarth-s/klaytn/datasync/chaindatafetcher/types"
 )
 
 const (
@@ -30,9 +30,9 @@ const (
 
 type HandleChainEventFn func(blockchain.ChainEvent, types.RequestType) error
 
-//go:generate mockgen -destination=./mocks/repository_mock.go -package=mocks github.com/klaytn/klaytn/datasync/chaindatafetcher Repository
-//go:generate mockgen -destination=./mocks/checkpoint_db_mock.go -package=mocks github.com/klaytn/klaytn/datasync/chaindatafetcher CheckpointDB
-//go:generate mockgen -destination=./mocks/component_setter_mock.go -package=mocks github.com/klaytn/klaytn/datasync/chaindatafetcher ComponentSetter
+//go:generate mockgen -destination=./mocks/repository_mock.go -package=mocks github.com/Monarth-s/klaytn/datasync/chaindatafetcher Repository
+//go:generate mockgen -destination=./mocks/checkpoint_db_mock.go -package=mocks github.com/Monarth-s/klaytn/datasync/chaindatafetcher CheckpointDB
+//go:generate mockgen -destination=./mocks/component_setter_mock.go -package=mocks github.com/Monarth-s/klaytn/datasync/chaindatafetcher ComponentSetter
 
 type Repository interface {
 	HandleChainEvent(event blockchain.ChainEvent, dataType types.RequestType) error

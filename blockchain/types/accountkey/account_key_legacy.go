@@ -19,9 +19,9 @@ package accountkey
 import (
 	"crypto/ecdsa"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/crypto"
-	"github.com/klaytn/klaytn/kerrors"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/crypto"
+	"github.com/Monarth-s/klaytn/kerrors"
 )
 
 // AccountKeyLegacy is used for accounts having no keys.

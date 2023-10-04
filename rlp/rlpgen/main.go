@@ -32,7 +32,7 @@ import (
 	"golang.org/x/tools/go/packages"
 )
 
-const pathOfPackageRLP = "github.com/klaytn/klaytn/rlp"
+const pathOfPackageRLP = "github.com/Monarth-s/klaytn/rlp"
 
 func main() {
 	var (

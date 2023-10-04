@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/klaytn/klaytn/event"
+	"github.com/Monarth-s/klaytn/event"
 )
 
 // This example demonstrates how SubscriptionScope can be used to control the lifetime of

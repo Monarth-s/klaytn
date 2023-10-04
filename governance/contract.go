@@ -20,10 +20,10 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/klaytn/klaytn/accounts/abi/bind/backends"
-	"github.com/klaytn/klaytn/common"
-	govcontract "github.com/klaytn/klaytn/contracts/gov"
-	"github.com/klaytn/klaytn/params"
+	"github.com/Monarth-s/klaytn/accounts/abi/bind/backends"
+	"github.com/Monarth-s/klaytn/common"
+	govcontract "github.com/Monarth-s/klaytn/contracts/gov"
+	"github.com/Monarth-s/klaytn/params"
 )
 
 var (

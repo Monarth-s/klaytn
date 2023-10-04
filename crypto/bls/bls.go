@@ -17,8 +17,8 @@
 package bls
 
 import (
-	"github.com/klaytn/klaytn/crypto/bls/blst"
-	"github.com/klaytn/klaytn/crypto/bls/types"
+	"github.com/Monarth-s/klaytn/crypto/bls/blst"
+	"github.com/Monarth-s/klaytn/crypto/bls/types"
 )
 
 type (

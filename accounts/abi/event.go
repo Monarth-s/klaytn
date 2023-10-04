@@ -24,8 +24,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/crypto"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/crypto"
 )
 
 // Event is an event potentially triggered by the EVM's LOG mechanism. The Event

@@ -25,7 +25,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/klaytn/klaytn/event"
+	"github.com/Monarth-s/klaytn/event"
 )
 
 // Manager is an overarching account manager that can communicate with various
@@ -42,7 +42,7 @@ type Manager struct {
 	lock sync.RWMutex
 }
 
-//go:generate mockgen -destination=accounts/mocks/account_manager_mock.go github.com/klaytn/klaytn/accounts AccountManager
+//go:generate mockgen -destination=accounts/mocks/account_manager_mock.go github.com/Monarth-s/klaytn/accounts AccountManager
 // AccountManager is an interface of accounts.Manager struct.
 type AccountManager interface {
 	Wallet(url string) (Wallet, error)

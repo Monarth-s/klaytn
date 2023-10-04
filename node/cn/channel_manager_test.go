@@ -19,8 +19,8 @@ package cn
 import (
 	"testing"
 
-	"github.com/klaytn/klaytn/consensus/istanbul/backend"
-	"github.com/klaytn/klaytn/networks/p2p"
+	"github.com/Monarth-s/klaytn/consensus/istanbul/backend"
+	"github.com/Monarth-s/klaytn/networks/p2p"
 	"github.com/stretchr/testify/assert"
 )
 

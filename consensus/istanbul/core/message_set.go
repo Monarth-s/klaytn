@@ -26,8 +26,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/consensus/istanbul"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/consensus/istanbul"
 )
 
 // Construct a new message set to accumulate messages for given sequence/view number.

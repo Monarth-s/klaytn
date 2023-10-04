@@ -20,7 +20,7 @@
 
 package istanbul
 
-import "github.com/klaytn/klaytn/common"
+import "github.com/Monarth-s/klaytn/common"
 
 // RequestEvent is posted to propose a proposal
 type RequestEvent struct {

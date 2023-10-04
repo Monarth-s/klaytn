@@ -28,7 +28,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/klaytn/klaytn/networks/rpc"
+	"github.com/Monarth-s/klaytn/networks/rpc"
 	"github.com/stretchr/testify/assert"
 )
 

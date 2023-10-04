@@ -26,8 +26,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/klaytn/klaytn/blockchain/vm"
-	"github.com/klaytn/klaytn/common/math"
+	"github.com/Monarth-s/klaytn/blockchain/vm"
+	"github.com/Monarth-s/klaytn/common/math"
 )
 
 // Compiler contains information about the parsed source

@@ -1,6 +1,6 @@
 # How to use Klaytn tests
 
-[Klaytn tests](https://github.com/klaytn/klaytn-tests) is not currently included
+[Klaytn tests](https://github.com/Monarth-s/klaytn-tests) is not currently included
 here due to its relatively large size.  It will be added as a git submodule
 later.
 
@@ -24,10 +24,10 @@ $ git clone git@github.com:klaytn/klaytn-tests.git
 ## 2. Create a symbolic link
 
 We assume Klaytn source tree is located in
-`$HOME/workspace/go/src/github.com/klaytn/klaytn`.
+`$HOME/workspace/go/src/github.com/Monarth-s/klaytn`.
 
 ```
-$ cd $HOME/workspace/go/src/github.com/klaytn/klaytn/tests
+$ cd $HOME/workspace/go/src/github.com/Monarth-s/klaytn/tests
 $ ln -s $HOME/workspace/klaytn-tests testdata
 ```
 

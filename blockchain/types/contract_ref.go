@@ -20,7 +20,7 @@
 
 package types
 
-import "github.com/klaytn/klaytn/common"
+import "github.com/Monarth-s/klaytn/common"
 
 // ContractRef is a reference to the contract's backing object
 type ContractRef interface {

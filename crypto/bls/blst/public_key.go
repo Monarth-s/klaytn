@@ -17,7 +17,7 @@
 package blst
 
 import (
-	"github.com/klaytn/klaytn/crypto/bls/types"
+	"github.com/Monarth-s/klaytn/crypto/bls/types"
 )
 
 type publicKey struct {

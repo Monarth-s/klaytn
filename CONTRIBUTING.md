@@ -23,7 +23,7 @@ There are various ways to contribute and participate. Please read the guidelines
 
 ### Issues and Bugs
 
-If you find a bug or other issues in Klaytn, please [submit an issue](https://github.com/klaytn/klaytn/issues). Before submitting an issue, please invest some extra time to figure out that:
+If you find a bug or other issues in Klaytn, please [submit an issue](https://github.com/Monarth-s/klaytn/issues). Before submitting an issue, please invest some extra time to figure out that:
 
 - The issue is not a duplicate issue.
 - The issue has not been fixed in the latest release of Klaytn.
@@ -34,11 +34,11 @@ When you report a bug, please make sure that your report has the following infor
 - A clear and complete description of the issue.
 - Code and/or screen captures are highly recommended.
 
-After confirming your report meets the above criteria, [submit the issue](https://github.com/klaytn/klaytn/issues). Please use [labels](#usage-of-labels) to categorize your issue.
+After confirming your report meets the above criteria, [submit the issue](https://github.com/Monarth-s/klaytn/issues). Please use [labels](#usage-of-labels) to categorize your issue.
 
 ### Feature Requests
 
-You can also use the [issue tracker](https://github.com/klaytn/klaytn/issues) to request a new feature or enhancement. Note that any code contribution without an issue link will not be accepted. Please submit an issue explaining your proposal first so that Klaytn community can fully understand and discuss the idea. Please use [labels](#usage-of-labels) for your feature request as well.
+You can also use the [issue tracker](https://github.com/Monarth-s/klaytn/issues) to request a new feature or enhancement. Note that any code contribution without an issue link will not be accepted. Please submit an issue explaining your proposal first so that Klaytn community can fully understand and discuss the idea. Please use [labels](#usage-of-labels) for your feature request as well.
 
 #### Usage of Labels
 

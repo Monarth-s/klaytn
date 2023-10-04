@@ -26,14 +26,14 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/klaytn/klaytn"
-	"github.com/klaytn/klaytn/blockchain/types"
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/datasync/downloader"
-	"github.com/klaytn/klaytn/datasync/fetcher"
-	"github.com/klaytn/klaytn/node/cn/snap"
-	"github.com/klaytn/klaytn/reward"
-	"github.com/klaytn/klaytn/rlp"
+	"github.com/Monarth-s/klaytn"
+	"github.com/Monarth-s/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/datasync/downloader"
+	"github.com/Monarth-s/klaytn/datasync/fetcher"
+	"github.com/Monarth-s/klaytn/node/cn/snap"
+	"github.com/Monarth-s/klaytn/reward"
+	"github.com/Monarth-s/klaytn/rlp"
 )
 
 // Constants to match up protocol versions and messages
@@ -128,7 +128,7 @@ var errorToString = map[int]string{
 	ErrUnsupportedEnginePolicy: "Unsupported engine or policy",
 }
 
-//go:generate mockgen -destination=node/cn/mocks/downloader_mock.go -package=mocks github.com/klaytn/klaytn/node/cn ProtocolManagerDownloader
+//go:generate mockgen -destination=node/cn/mocks/downloader_mock.go -package=mocks github.com/Monarth-s/klaytn/node/cn ProtocolManagerDownloader
 // ProtocolManagerDownloader is an interface of downloader.Downloader used by ProtocolManager.
 type ProtocolManagerDownloader interface {
 	RegisterPeer(id string, version int, peer downloader.Peer) error
@@ -151,7 +151,7 @@ type ProtocolManagerDownloader interface {
 	SyncStakingInfoStatus() *downloader.SyncingStatus
 }
 
-//go:generate mockgen -destination=node/cn/mocks/fetcher_mock.go -package=mocks github.com/klaytn/klaytn/node/cn ProtocolManagerFetcher
+//go:generate mockgen -destination=node/cn/mocks/fetcher_mock.go -package=mocks github.com/Monarth-s/klaytn/node/cn ProtocolManagerFetcher
 // ProtocolManagerFetcher is an interface of fetcher.Fetcher used by ProtocolManager.
 type ProtocolManagerFetcher interface {
 	Enqueue(peer string, block *types.Block) error

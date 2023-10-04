@@ -1,7 +1,7 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/klaytn/klaytn)](https://goreportcard.com/report/github.com/klaytn/klaytn)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Monarth-s/klaytn)](https://goreportcard.com/report/github.com/Monarth-s/klaytn)
 [![CircleCI](https://circleci.com/gh/klaytn/klaytn/tree/dev.svg?style=svg)](https://circleci.com/gh/klaytn/klaytn/tree/dev)
 [![codecov](https://codecov.io/gh/klaytn/klaytn/branch/dev/graph/badge.svg)](https://codecov.io/gh/klaytn/klaytn)
-[![GoDoc](https://godoc.org/github.com/klaytn/klaytn?status.svg)](https://pkg.go.dev/github.com/klaytn/klaytn)
+[![GoDoc](https://godoc.org/github.com/Monarth-s/klaytn?status.svg)](https://pkg.go.dev/github.com/Monarth-s/klaytn)
 [![Gitter](https://badges.gitter.im/klaytn/Lobby.svg)](https://gitter.im/klaytn/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Branch name will be changed

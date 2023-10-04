@@ -21,7 +21,7 @@
 package fetcher
 
 import (
-	klaytnmetrics "github.com/klaytn/klaytn/metrics"
+	klaytnmetrics "github.com/Monarth-s/klaytn/metrics"
 	"github.com/rcrowley/go-metrics"
 )
 

@@ -27,10 +27,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/klaytn/klaytn/blockchain/types"
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/networks/p2p"
-	"github.com/klaytn/klaytn/networks/p2p/discover"
+	"github.com/Monarth-s/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/networks/p2p"
+	"github.com/Monarth-s/klaytn/networks/p2p/discover"
 )
 
 var (
@@ -56,7 +56,7 @@ type PeerSetManager interface {
 	BridgePeerSet() *bridgePeerSet
 }
 
-//go:generate mockgen -destination=bridgepeer_mock_test.go -package=sc github.com/klaytn/klaytn/node/sc BridgePeer
+//go:generate mockgen -destination=bridgepeer_mock_test.go -package=sc github.com/Monarth-s/klaytn/node/sc BridgePeer
 type BridgePeer interface {
 	// Close signals the broadcast goroutine to terminate.
 	Close()

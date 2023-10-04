@@ -23,10 +23,10 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/klaytn/klaytn/accounts/abi/bind"
-	"github.com/klaytn/klaytn/common"
-	sctoken "github.com/klaytn/klaytn/contracts/sc_erc20"
-	scnft "github.com/klaytn/klaytn/contracts/sc_erc721"
+	"github.com/Monarth-s/klaytn/accounts/abi/bind"
+	"github.com/Monarth-s/klaytn/common"
+	sctoken "github.com/Monarth-s/klaytn/contracts/sc_erc20"
+	scnft "github.com/Monarth-s/klaytn/contracts/sc_erc721"
 	"github.com/stretchr/testify/assert"
 )
 

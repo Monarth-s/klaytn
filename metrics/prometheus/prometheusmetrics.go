@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	klaytnmetrics "github.com/klaytn/klaytn/metrics"
+	klaytnmetrics "github.com/Monarth-s/klaytn/metrics"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/rcrowley/go-metrics"

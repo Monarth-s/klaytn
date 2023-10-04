@@ -22,8 +22,8 @@ import (
 	"math/big"
 
 	"github.com/go-stack/stack"
-	"github.com/klaytn/klaytn/blockchain/types/accountkey"
-	"github.com/klaytn/klaytn/common"
+	"github.com/Monarth-s/klaytn/blockchain/types/accountkey"
+	"github.com/Monarth-s/klaytn/common"
 )
 
 // LegacyAccount is the Klaytn consensus representation of legacy accounts.

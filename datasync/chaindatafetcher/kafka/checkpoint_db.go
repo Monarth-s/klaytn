@@ -17,7 +17,7 @@
 package kafka
 
 import (
-	"github.com/klaytn/klaytn/storage/database"
+	"github.com/Monarth-s/klaytn/storage/database"
 )
 
 type CheckpointDB struct {

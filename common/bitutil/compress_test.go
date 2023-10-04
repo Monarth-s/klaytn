@@ -25,7 +25,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/klaytn/klaytn/common/hexutil"
+	"github.com/Monarth-s/klaytn/common/hexutil"
 )
 
 // Tests that data bitset encoding and decoding works and is bijective.

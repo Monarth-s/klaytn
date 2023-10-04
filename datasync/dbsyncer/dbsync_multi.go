@@ -21,7 +21,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/klaytn/klaytn/blockchain/types"
+	"github.com/Monarth-s/klaytn/blockchain/types"
 )
 
 func (ds *DBSyncer) HandleChainEventParallel(block *types.Block) error {

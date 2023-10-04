@@ -32,7 +32,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/klaytn/klaytn/rlp/internal/rlpstruct"
+	"github.com/Monarth-s/klaytn/rlp/internal/rlpstruct"
 )
 
 //lint:ignore ST1012 EOL is not an error.

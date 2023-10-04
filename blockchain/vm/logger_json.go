@@ -25,8 +25,8 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/klaytn/klaytn/common"
-	"github.com/klaytn/klaytn/common/math"
+	"github.com/Monarth-s/klaytn/common"
+	"github.com/Monarth-s/klaytn/common/math"
 )
 
 type JSONLogger struct {

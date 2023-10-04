@@ -25,7 +25,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/klaytn/klaytn/networks/rpc"
+	"github.com/Monarth-s/klaytn/networks/rpc"
 )
 
 func TestFeeHistory(t *testing.T) {
