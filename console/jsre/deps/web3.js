@@ -2215,8 +2215,8 @@ var getValueOfUnit = function (unit) {
  * @return {String|Object} When given a BigNumber object it returns one as well, otherwise a number
 */
 var fromWei = function(number, unit) {
-    var klayUnit = unitEthToViniMap[unit] ? unitEthToViniMap[unit] : unit;
-    var returnValue = toBigNumber(number).dividedBy(getValueOfUnit(klayUnit));
+    var viniUnit = unitEthToViniMap[unit] ? unitEthToViniMap[unit] : unit;
+    var returnValue = toBigNumber(number).dividedBy(getValueOfUnit(viniUnit));
 
     return isBigNumber(number) ? returnValue : returnValue.toString(10);
 };
@@ -2271,8 +2271,8 @@ var fromPeb = function(number, unit) {
  * @return {String|Object} When given a BigNumber object it returns one as well, otherwise a number
 */
 var toWei = function(number, unit) {
-    var klayUnit = unitEthToViniMap[unit] ? unitEthToViniMap[unit] : unit;
-    var returnValue = toBigNumber(number).times(getValueOfUnit(klayUnit));
+    var viniUnit = unitEthToViniMap[unit] ? unitEthToViniMap[unit] : unit;
+    var returnValue = toBigNumber(number).times(getValueOfUnit(viniUnit));
 
     return isBigNumber(number) ? returnValue : returnValue.toString(10);
 };
