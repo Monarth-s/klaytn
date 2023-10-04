@@ -143,7 +143,7 @@ func TestMainBridge_basic(t *testing.T) {
 	txPool := &blockchain.TxPool{}
 	compAPIs := []rpc.API{
 		{
-			Namespace: "klay",
+			Namespace: "vini",
 			Version:   "1.0",
 			Service:   api.NewPublicKlayAPI(&cn.CNAPIBackend{}),
 			Public:    true,

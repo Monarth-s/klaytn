@@ -539,17 +539,17 @@ func (s *CN) APIs() []rpc.API {
 	// Append all the local APIs and return
 	return append(apis, []rpc.API{
 		{
-			Namespace: "klay",
+			Namespace: "vini",
 			Version:   "1.0",
 			Service:   NewPublicKlayAPI(s),
 			Public:    true,
 		}, {
-			Namespace: "klay",
+			Namespace: "vini",
 			Version:   "1.0",
 			Service:   publicDownloaderAPI,
 			Public:    true,
 		}, {
-			Namespace: "klay",
+			Namespace: "vini",
 			Version:   "1.0",
 			Service:   publicFilterAPI,
 			Public:    true,
@@ -587,7 +587,7 @@ func (s *CN) APIs() []rpc.API {
 			Service:   governanceAPI,
 			Public:    true,
 		}, {
-			Namespace: "klay",
+			Namespace: "vini",
 			Version:   "1.0",
 			Service:   governanceKlayAPI,
 			Public:    true,

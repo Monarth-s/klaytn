@@ -25,7 +25,7 @@ Overview of api package
 
 This package provides various APIs to access the data of the Klaytn node.
 Remote users can interact with Klyatn by calling these APIs instead of IPC.
-APIs are grouped by access modifiers (public or private) and namespaces (klay, txpool, debug and personal).
+APIs are grouped by access modifiers (public or private) and namespaces (vini, txpool, debug and personal).
 
 Source Files
 
@@ -38,7 +38,7 @@ Source Files
   - api_public_debug.go            : provides public APIs exposed over the debugging node.
   - api_public_klay.go             : provides public APIs to access Klaytn related data.
   - api_public_net.go              : provides public APIs to offer network related RPC methods.
-  - api_public_transaction_pool.go : provides public APIs having "klay" namespace to access transaction pool data.
+  - api_public_transaction_pool.go : provides public APIs having "vini" namespace to access transaction pool data.
   - api_public_tx_pool.go          : provides public APIs having "txpool" namespace to access transaction pool data.
   - backend.go                     : provides the common API services.
   - tx_args.go                     : provides API argument structures and functions.
