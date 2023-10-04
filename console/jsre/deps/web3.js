@@ -1,4 +1,4 @@
-// Modifications Copyright 2018 The klaytn Authors
+// Modifications Copyright 2018 The vinitn Authors
 // Copyright 2017 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
@@ -16,7 +16,7 @@
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 //
 // This file is derived from internal/jsre/deps/web3.js (2018/06/04).
-// Modified and improved for the klaytn development.
+// Modified and improved for the vinitn development.
 
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports=[
@@ -1781,29 +1781,29 @@ if (typeof XMLHttpRequest === 'undefined') {
 /// required to define ETH_BIGNUMBER_ROUNDING_MODE
 var BigNumber = require('bignumber.js');
 
-var KLAY_UNITS = [
+var VINI_UNITS = [
     'peb',
     'kpeb',
     'Mpeb',
     'Gpeb',
     'ston',
-    'uKLAY',
-    'mKLAY',
-    'KLAY',
-    'kKLAY',
-    'MKLAY',
-    'GKLAY',
-    'TKLAY',
-    'PKLAY',
-    'EKLAY',
-    'ZKLAY',
-    'YKLAY',
+    'uVINI',
+    'mVINI',
+    'VINI',
+    'kVINI',
+    'MVINI',
+    'GVINI',
+    'TVINI',
+    'PVINI',
+    'EVINI',
+    'ZVINI',
+    'YVINI',
 ];
 
 module.exports = {
     ETH_PADDING: 32,
     ETH_SIGNATURE_LENGTH: 4,
-    ETH_UNITS: KLAY_UNITS,
+    ETH_UNITS: VINI_UNITS,
     ETH_BIGNUMBER_ROUNDING_MODE: { ROUNDING_MODE: BigNumber.ROUND_DOWN },
     ETH_POLLING_TIMEOUT: 1000/2,
     defaultBlock: 'latest',
@@ -1893,23 +1893,23 @@ var sha3 = require('./sha3.js');
 var utf8 = require('utf8');
 
 var unitMap = {
-    'noKLAY':      '0',
+    'noVINI':      '0',
     'peb':         '1',
     'kpeb':        '1000',
     'Mpeb':        '1000000',
     'Gpeb':        '1000000000',
     'ston':        '1000000000',
-    'uKLAY':       '1000000000000',
-    'mKLAY':       '1000000000000000',
-    'KLAY':        '1000000000000000000',
-    'kKLAY':       '1000000000000000000000',
-    'MKLAY':       '1000000000000000000000000',
-    'GKLAY':       '1000000000000000000000000000',
-    'TKLAY':       '1000000000000000000000000000000'
+    'uVINI':       '1000000000000',
+    'mVINI':       '1000000000000000',
+    'VINI':        '1000000000000000000',
+    'kVINI':       '1000000000000000000000',
+    'MVINI':       '1000000000000000000000000',
+    'GVINI':       '1000000000000000000000000000',
+    'TVINI':       '1000000000000000000000000000000'
 };
 
-var unitEthToKlayMap = {
-    'noether':      'noKLAY',
+var unitEthToViniMap = {
+    'noether':      'noVINI',
     'wei':          'peb',
     'kwei':         'kpeb',
     'Kwei':         'kpeb',
@@ -1924,18 +1924,18 @@ var unitEthToKlayMap = {
     'shannon':      'Gpeb',
     'nanoether':    'Gpeb',
     'nano':         'Gpeb',
-    'szabo':        'uKLAY',
-    'microether':   'uKLAY',
-    'micro':        'uKLAY',
-    'finney':       'mKLAY',
-    'milliether':   'mKLAY',
-    'milli':        'mKLAY',
-    'ether':        'KLAY',
-    'kether':       'kKLAY',
-    'grand':        'kKLAY',
-    'mether':       'MKLAY',
-    'gether':       'GKLAY',
-    'tether':       'TKLAY'
+    'szabo':        'uVINI',
+    'microether':   'uVINI',
+    'micro':        'uVINI',
+    'finney':       'mVINI',
+    'milliether':   'mVINI',
+    'milli':        'mVINI',
+    'ether':        'VINI',
+    'kether':       'kVINI',
+    'grand':        'kVINI',
+    'mether':       'MVINI',
+    'gether':       'GVINI',
+    'tether':       'TVINI'
 };
 
 /**
@@ -2184,7 +2184,7 @@ function fancyStringify2D(obj) {
  * @throws error if the unit is not correct
  */
 var getValueOfUnit = function (unit) {
-    unit = unit ? unit : 'KLAY';
+    unit = unit ? unit : 'VINI';
     var unitValue = unitMap[unit];
     if (unitValue === undefined) {
         throw new Error('This unit doesn\'t exist, please use one of the following units\n'
@@ -2215,31 +2215,31 @@ var getValueOfUnit = function (unit) {
  * @return {String|Object} When given a BigNumber object it returns one as well, otherwise a number
 */
 var fromWei = function(number, unit) {
-    var klayUnit = unitEthToKlayMap[unit] ? unitEthToKlayMap[unit] : unit;
+    var klayUnit = unitEthToViniMap[unit] ? unitEthToViniMap[unit] : unit;
     var returnValue = toBigNumber(number).dividedBy(getValueOfUnit(klayUnit));
 
     return isBigNumber(number) ? returnValue : returnValue.toString(10);
 };
 
 /**
- * Takes a number of peb and converts it to any other KLAY unit.
+ * Takes a number of peb and converts it to any other VINI unit.
  *
  * Possible units are:
  *   SI Short
  * - kpeb
  * - Mpeb
  * - Gpeb
- * - uKLAY
- * - mKLAY
- * - KLAY
- * - kKLAY
- * - MKLAY
- * - GKLAY
- * - TKLAY
+ * - uVINI
+ * - mVINI
+ * - VINI
+ * - kVINI
+ * - MVINI
+ * - GVINI
+ * - TVINI
  *
  * @method fromPeb
  * @param {Number|String} number can be a number, number string or a HEX of a decimal
- * @param {String} unit the unit to convert to, default KLAY
+ * @param {String} unit the unit to convert to, default VINI
  * @return {String|Object} When given a BigNumber object it returns one as well, otherwise a number
  */
 var fromPeb = function(number, unit) {
@@ -2271,7 +2271,7 @@ var fromPeb = function(number, unit) {
  * @return {String|Object} When given a BigNumber object it returns one as well, otherwise a number
 */
 var toWei = function(number, unit) {
-    var klayUnit = unitEthToKlayMap[unit] ? unitEthToKlayMap[unit] : unit;
+    var klayUnit = unitEthToViniMap[unit] ? unitEthToViniMap[unit] : unit;
     var returnValue = toBigNumber(number).times(getValueOfUnit(klayUnit));
 
     return isBigNumber(number) ? returnValue : returnValue.toString(10);
@@ -2285,13 +2285,13 @@ var toWei = function(number, unit) {
  * - kpeb
  * - Mpeb
  * - Gpeb
- * - uKLAY
- * - mKLAY
- * - KLAY
- * - kKLAY
- * - MKLAY
- * - GKLAY
- * - TKLAY
+ * - uVINI
+ * - mVINI
+ * - VINI
+ * - kVINI
+ * - MVINI
+ * - GVINI
+ * - TVINI
  *
  * @method toPeb
  * @param {Number|String|BigNumber} number can be a number, number string or a HEX of a decimal
@@ -2521,7 +2521,7 @@ var isJson = function (str) {
 };
 
 /**
- * Returns true if given string is a valid Klaytn block header bloom.
+ * Returns true if given string is a valid Vinitn block header bloom.
  *
  * @method isBloom
  * @param {String} hex encoded bloom filter
@@ -2622,7 +2622,7 @@ module.exports={
 
 var RequestManager = require('./web3/requestmanager');
 var Iban = require('./web3/iban');
-var Klay = require('./web3/methods/klay');
+var Vini = require('./web3/methods/vini');
 var Eth = require('./web3/methods/eth');
 var DB = require('./web3/methods/db');
 var Shh = require('./web3/methods/shh');
@@ -2645,7 +2645,7 @@ var BigNumber = require('bignumber.js');
 function Web3 (provider) {
     this._requestManager = new RequestManager(provider);
     this.currentProvider = provider;
-    this.klay = new Klay(this);
+    this.vini = new Vini(this);
     this.eth = new Eth(this);
     this.db = new DB(this);
     this.shh = new Shh(this);
@@ -2664,23 +2664,23 @@ function Web3 (provider) {
     this._extend({
         properties: properties()
     });
-    this.klay.BigNumber = BigNumber;
-    this.klay.toHex = utils.toHex;
-    this.klay.toAscii = utils.toAscii;
-    this.klay.toUtf8 = utils.toUtf8;
-    this.klay.fromAscii = utils.fromAscii;
-    this.klay.fromUtf8 = utils.fromUtf8;
-    this.klay.toDecimal = utils.toDecimal;
-    this.klay.fromDecimal = utils.fromDecimal;
-    this.klay.toBigNumber = utils.toBigNumber;
-    this.klay.toPeb = utils.toPeb;
-    this.klay.fromPeb = utils.fromPeb;
-    this.klay.isAddress = utils.isAddress;
-    this.klay.isChecksumAddress = utils.isChecksumAddress;
-    this.klay.toChecksumAddress = utils.toChecksumAddress;
-    this.klay.isIBAN = utils.isIBAN;
-    this.klay.padLeft = utils.padLeft;
-    this.klay.padRight = utils.padRight;
+    this.vini.BigNumber = BigNumber;
+    this.vini.toHex = utils.toHex;
+    this.vini.toAscii = utils.toAscii;
+    this.vini.toUtf8 = utils.toUtf8;
+    this.vini.fromAscii = utils.fromAscii;
+    this.vini.fromUtf8 = utils.fromUtf8;
+    this.vini.toDecimal = utils.toDecimal;
+    this.vini.fromDecimal = utils.fromDecimal;
+    this.vini.toBigNumber = utils.toBigNumber;
+    this.vini.toPeb = utils.toPeb;
+    this.vini.fromPeb = utils.fromPeb;
+    this.vini.isAddress = utils.isAddress;
+    this.vini.isChecksumAddress = utils.isChecksumAddress;
+    this.vini.toChecksumAddress = utils.toChecksumAddress;
+    this.vini.isIBAN = utils.isIBAN;
+    this.vini.padLeft = utils.padLeft;
+    this.vini.padRight = utils.padRight;
 }
 
 // expose providers on the class
@@ -2736,7 +2736,7 @@ var properties = function () {
     return [
         new Property({
             name: 'version.node',
-            getter: 'klay_clientVersion'
+            getter: 'vini_clientVersion'
         }),
         new Property({
             name: 'version.network',
@@ -2744,8 +2744,8 @@ var properties = function () {
             inputFormatter: utils.toDecimal
         }),
         new Property({
-            name: 'version.klaytn',
-            getter: 'klay_protocolVersion',
+            name: 'version.vinitn',
+            getter: 'vini_protocolVersion',
             inputFormatter: utils.toDecimal
         }),
         new Property({
@@ -2767,7 +2767,7 @@ Web3.prototype.createBatch = function () {
 module.exports = Web3;
 
 
-},{"./utils/sha3":19,"./utils/utils":20,"./version.json":21,"./web3/batch":24,"./web3/extend":28,"./web3/httpprovider":32,"./web3/iban":33,"./web3/ipcprovider":34,"./web3/methods/db":37,"./web3/methods/klay":38,"./web3/methods/eth":87,"./web3/methods/net":39,"./web3/methods/personal":40,"./web3/methods/shh":41,"./web3/methods/swarm":42,"./web3/property":45,"./web3/requestmanager":46,"./web3/settings":47,"bignumber.js":"bignumber.js"}],23:[function(require,module,exports){
+},{"./utils/sha3":19,"./utils/utils":20,"./version.json":21,"./web3/batch":24,"./web3/extend":28,"./web3/httpprovider":32,"./web3/iban":33,"./web3/ipcprovider":34,"./web3/methods/db":37,"./web3/methods/vini":38,"./web3/methods/eth":87,"./web3/methods/net":39,"./web3/methods/personal":40,"./web3/methods/shh":41,"./web3/methods/swarm":42,"./web3/property":45,"./web3/requestmanager":46,"./web3/settings":47,"bignumber.js":"bignumber.js"}],23:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -2846,7 +2846,7 @@ AllSolidityEvents.prototype.execute = function (options, callback) {
 
     var o = this.encode(options);
     var formatter = this.decode.bind(this);
-    return new Filter(o, 'klay', this._requestManager, watches.klay(), formatter, callback);
+    return new Filter(o, 'vini', this._requestManager, watches.vini(), formatter, callback);
 };
 
 AllSolidityEvents.prototype.attachToContract = function (contract) {
@@ -3090,8 +3090,8 @@ var checkForContractAddress = function(contract, callback){
  * @method ContractFactory
  * @param {Array} abi
  */
-var ContractFactory = function (klay, abi) {
-    this.klay = klay;
+var ContractFactory = function (vini, abi) {
+    this.vini = vini;
     this.abi = abi;
 
     /**
@@ -3107,7 +3107,7 @@ var ContractFactory = function (klay, abi) {
     this.new = function () {
         /*jshint maxcomplexity: 7 */
 
-        var contract = new Contract(this.klay, this.abi);
+        var contract = new Contract(this.vini, this.abi);
 
         // parse arguments
         var options = {}; // required!
@@ -3139,7 +3139,7 @@ var ContractFactory = function (klay, abi) {
         if (callback) {
 
             // wait for the contract address adn check if the code was deployed
-            this.klay.sendTransaction(options, function (err, hash) {
+            this.vini.sendTransaction(options, function (err, hash) {
                 if (err) {
                     callback(err);
                 } else {
@@ -3153,7 +3153,7 @@ var ContractFactory = function (klay, abi) {
                 }
             });
         } else {
-            var hash = this.klay.sendTransaction(options);
+            var hash = this.vini.sendTransaction(options);
             // add the transaction hash
             contract.transactionHash = hash;
             checkForContractAddress(contract);
@@ -3188,7 +3188,7 @@ var ContractFactory = function (klay, abi) {
  * otherwise calls callback function (err, contract)
  */
 ContractFactory.prototype.at = function (address, callback) {
-    var contract = new Contract(this.klay, this.abi, address);
+    var contract = new Contract(this.vini, this.abi, address);
 
     // this functions are not part of prototype,
     // because we dont want to spoil the interface
@@ -3228,8 +3228,8 @@ ContractFactory.prototype.getData = function () {
  * @param {Array} abi
  * @param {Address} contract address
  */
-var Contract = function (klay, abi, address) {
-    this._klay = klay;
+var Contract = function (vini, abi, address) {
+    this._klay = vini;
     this.transactionHash = null;
     this.address = address;
     this.abi = abi;
@@ -3471,7 +3471,7 @@ SolidityEvent.prototype.execute = function (indexed, options, callback) {
 
     var o = this.encode(indexed, options);
     var formatter = this.decode.bind(this);
-    return new Filter(o, 'klay', this._requestManager, watches.klay(), formatter, callback);
+    return new Filter(o, 'vini', this._requestManager, watches.vini(), formatter, callback);
 };
 
 /**
@@ -3605,7 +3605,7 @@ var getOptions = function (options, type) {
 
 
     switch(type) {
-        case 'klay':
+        case 'vini':
 
             // make sure topics, get converted to hex
             options.topics = options.topics || [];
@@ -4136,8 +4136,8 @@ var sha3 = require('../utils/sha3');
 /**
  * This prototype should be used to call/sendTransaction to solidity functions
  */
-var SolidityFunction = function (klay, json, address) {
-    this._klay = klay;
+var SolidityFunction = function (vini, json, address) {
+    this._klay = vini;
     this._inputTypes = json.inputs.map(function (i) {
         return i.type;
     });
@@ -4343,7 +4343,7 @@ SolidityFunction.prototype.request = function () {
     var format = this.unpackOutput.bind(this);
 
     return {
-        method: this._constant ? 'klay_call' : 'klay_sendTransaction',
+        method: this._constant ? 'vini_call' : 'vini_sendTransaction',
         callback: callback,
         params: [payload],
         format: format
@@ -5347,22 +5347,22 @@ var Iban = require('../iban');
 var transfer = require('../transfer');
 
 var blockCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? "klay_getBlockByHash" : "klay_getBlockByNumber";
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? "vini_getBlockByHash" : "vini_getBlockByNumber";
 };
 
 var headerCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? "klay_getHeaderByHash" : "klay_getHeaderByNumber";
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? "vini_getHeaderByHash" : "vini_getHeaderByNumber";
 };
 
 var transactionFromBlockCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? 'klay_getTransactionByBlockHashAndIndex' : 'klay_getTransactionByBlockNumberAndIndex';
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? 'vini_getTransactionByBlockHashAndIndex' : 'vini_getTransactionByBlockNumberAndIndex';
 };
 
 var getBlockTransactionCountCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? 'klay_getBlockTransactionCountByHash' : 'klay_getBlockTransactionCountByNumber';
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0 && args[0].length === 66) ? 'vini_getBlockTransactionCountByHash' : 'vini_getBlockTransactionCountByNumber';
 };
 
-function Klay(web3) {
+function Vini(web3) {
     this._requestManager = web3._requestManager;
 
     var self = this;
@@ -5382,7 +5382,7 @@ function Klay(web3) {
     this.sendIBANTransaction = transfer.bind(null, this);
 }
 
-Object.defineProperty(Klay.prototype, 'defaultBlock', {
+Object.defineProperty(Vini.prototype, 'defaultBlock', {
     get: function () {
         return c.defaultBlock;
     },
@@ -5392,7 +5392,7 @@ Object.defineProperty(Klay.prototype, 'defaultBlock', {
     }
 });
 
-Object.defineProperty(Klay.prototype, 'defaultAccount', {
+Object.defineProperty(Vini.prototype, 'defaultAccount', {
     get: function () {
         return c.defaultAccount;
     },
@@ -5405,7 +5405,7 @@ Object.defineProperty(Klay.prototype, 'defaultAccount', {
 var methods = function () {
     var getBalance = new Method({
         name: 'getBalance',
-        call: 'klay_getBalance',
+        call: 'vini_getBalance',
         params: 2,
         inputFormatter: [formatters.inputAddressFormatter, formatters.inputDefaultBlockNumberFormatter],
         outputFormatter: formatters.outputBigNumberFormatter
@@ -5413,14 +5413,14 @@ var methods = function () {
 
     var getStorageAt = new Method({
         name: 'getStorageAt',
-        call: 'klay_getStorageAt',
+        call: 'vini_getStorageAt',
         params: 3,
         inputFormatter: [null, utils.toHex, formatters.inputDefaultBlockNumberFormatter]
     });
 
     var getCode = new Method({
         name: 'getCode',
-        call: 'klay_getCode',
+        call: 'vini_getCode',
         params: 2,
         inputFormatter: [formatters.inputAddressFormatter, formatters.inputDefaultBlockNumberFormatter]
     });
@@ -5450,14 +5450,14 @@ var methods = function () {
 
     var getTransaction = new Method({
         name: 'getTransaction',
-        call: 'klay_getTransactionByHash',
+        call: 'vini_getTransactionByHash',
         params: 1,
         outputFormatter: formatters.outputTransactionFormatter
     });
 
     var getDecodedAnchoringTransactionByHash = new Method({
         name: 'getDecodedAnchoringTransactionByHash',
-        call: 'klay_getDecodedAnchoringTransactionByHash',
+        call: 'vini_getDecodedAnchoringTransactionByHash',
         params: 1
     });
 
@@ -5471,14 +5471,14 @@ var methods = function () {
 
     var getTransactionReceipt = new Method({
         name: 'getTransactionReceipt',
-        call: 'klay_getTransactionReceipt',
+        call: 'vini_getTransactionReceipt',
         params: 1,
         outputFormatter: formatters.outputTransactionReceiptFormatter
     });
 
     var getTransactionCount = new Method({
         name: 'getTransactionCount',
-        call: 'klay_getTransactionCount',
+        call: 'vini_getTransactionCount',
         params: 2,
         inputFormatter: [null, formatters.inputDefaultBlockNumberFormatter],
         outputFormatter: utils.toDecimal
@@ -5486,42 +5486,42 @@ var methods = function () {
 
     var sendRawTransaction = new Method({
         name: 'sendRawTransaction',
-        call: 'klay_sendRawTransaction',
+        call: 'vini_sendRawTransaction',
         params: 1,
         inputFormatter: [null]
     });
 
     var sendTransaction = new Method({
         name: 'sendTransaction',
-        call: 'klay_sendTransaction',
+        call: 'vini_sendTransaction',
         params: 1,
         inputFormatter: [formatters.inputTransactionFormatter]
     });
 
     var signTransaction = new Method({
         name: 'signTransaction',
-        call: 'klay_signTransaction',
+        call: 'vini_signTransaction',
         params: 1,
         inputFormatter: [formatters.inputTransactionFormatter]
     });
 
     var sign = new Method({
         name: 'sign',
-        call: 'klay_sign',
+        call: 'vini_sign',
         params: 2,
         inputFormatter: [formatters.inputAddressFormatter, null]
     });
 
     var call = new Method({
         name: 'call',
-        call: 'klay_call',
+        call: 'vini_call',
         params: 2,
         inputFormatter: [formatters.inputCallFormatter, formatters.inputDefaultBlockNumberFormatter]
     });
 
     var estimateGas = new Method({
         name: 'estimateGas',
-        call: 'klay_estimateGas',
+        call: 'vini_estimateGas',
         params: 1,
         inputFormatter: [formatters.inputCallFormatter],
         outputFormatter: utils.toDecimal
@@ -5553,57 +5553,57 @@ var properties = function () {
     return [
         new Property({
             name: 'syncing',
-            getter: 'klay_syncing',
+            getter: 'vini_syncing',
             outputFormatter: formatters.outputSyncingFormatter
         }),
         new Property({
             name: 'accounts',
-            getter: 'klay_accounts'
+            getter: 'vini_accounts'
         }),
         new Property({
             name: 'blockNumber',
-            getter: 'klay_blockNumber',
+            getter: 'vini_blockNumber',
             outputFormatter: utils.toDecimal
         }),
         new Property({
           name: 'chainID',
-          getter: 'klay_chainID',
+          getter: 'vini_chainID',
           outputFormatter: formatters.outputBigNumberFormatter
         }),
         new Property({
           name: 'chainId',
-          getter: 'klay_chainId',
+          getter: 'vini_chainId',
           outputFormatter: formatters.outputBigNumberFormatter
         }),
         new Property({
             name: 'protocolVersion',
-            getter: 'klay_protocolVersion'
+            getter: 'vini_protocolVersion'
         })
     ];
 };
 
-Klay.prototype.contract = function (abi) {
+Vini.prototype.contract = function (abi) {
     var factory = new Contract(this, abi);
     return factory;
 };
 
-Klay.prototype.filter = function (options, callback, filterCreationErrorCallback) {
-    return new Filter(options, 'klay', this._requestManager, watches.klay(), formatters.outputLogFormatter, callback, filterCreationErrorCallback);
+Vini.prototype.filter = function (options, callback, filterCreationErrorCallback) {
+    return new Filter(options, 'vini', this._requestManager, watches.vini(), formatters.outputLogFormatter, callback, filterCreationErrorCallback);
 };
 
-Klay.prototype.namereg = function () {
+Vini.prototype.namereg = function () {
     return this.contract(namereg.global.abi).at(namereg.global.address);
 };
 
-Klay.prototype.icapNamereg = function () {
+Vini.prototype.icapNamereg = function () {
     return this.contract(namereg.icap.abi).at(namereg.icap.address);
 };
 
-Klay.prototype.isSyncing = function (callback) {
+Vini.prototype.isSyncing = function (callback) {
     return new IsSyncing(this._requestManager, callback);
 };
 
-module.exports = Klay;
+module.exports = Vini;
 
 },{"../../utils/config":18,"../../utils/utils":20,"../contract":25,"../filter":29,"../formatters":30,"../iban":33,"../method":36,"../namereg":44,"../property":45,"../syncing":48,"../transfer":49,"./watches":43}],87:[function(require,module,exports){
 /*
@@ -6423,7 +6423,7 @@ module.exports = Swarm;
 var Method = require('../method');
 
 /// @returns an array of objects describing web3.eth.filter api methods
-var klay = function () {
+var vini = function () {
     var newFilterCall = function (args) {
         var type = args[0];
 
@@ -6431,13 +6431,13 @@ var klay = function () {
             case 'latest':
                 args.shift();
                 this.params = 0;
-                return 'klay_newBlockFilter';
+                return 'vini_newBlockFilter';
             case 'pending':
                 args.shift();
                 this.params = 0;
-                return 'klay_newPendingTransactionFilter';
+                return 'vini_newPendingTransactionFilter';
             default:
-                return 'klay_newFilter';
+                return 'vini_newFilter';
         }
     };
 
@@ -6449,19 +6449,19 @@ var klay = function () {
 
     var uninstallFilter = new Method({
         name: 'uninstallFilter',
-        call: 'klay_uninstallFilter',
+        call: 'vini_uninstallFilter',
         params: 1
     });
 
     var getLogs = new Method({
         name: 'getLogs',
-        call: 'klay_getFilterLogs',
+        call: 'vini_getFilterLogs',
         params: 1
     });
 
     var poll = new Method({
         name: 'poll',
-        call: 'klay_getFilterChanges',
+        call: 'vini_getFilterChanges',
         params: 1
     });
 
@@ -6553,7 +6553,7 @@ var shh = function () {
 };
 
 module.exports = {
-    klay: klay,
+    vini: vini,
     eth: eth,
     shh: shh
 };
@@ -7088,7 +7088,7 @@ var pollSyncing = function(self) {
     };
 
     self.requestManager.startPolling({
-        method: 'klay_syncing',
+        method: 'vini_syncing',
         params: [],
     }, self.pollId, onMessage, self.stopWatching.bind(self));
 
@@ -7154,23 +7154,23 @@ var exchangeAbi = require('../contracts/SmartExchange.json');
  * @param {Value} value to be tranfered
  * @param {Function} callback, callback
  */
-var transfer = function (klay, from, to, value, callback) {
+var transfer = function (vini, from, to, value, callback) {
     var iban = new Iban(to);
     if (!iban.isValid()) {
         throw new Error('invalid iban address');
     }
 
     if (iban.isDirect()) {
-        return transferToAddress(klay, from, iban.address(), value, callback);
+        return transferToAddress(vini, from, iban.address(), value, callback);
     }
 
     if (!callback) {
-        var address = klay.icapNamereg().addr(iban.institution());
-        return deposit(klay, from, address, value, iban.client());
+        var address = vini.icapNamereg().addr(iban.institution());
+        return deposit(vini, from, address, value, iban.client());
     }
 
-    klay.icapNamereg().addr(iban.institution(), function (err, address) {
-        return deposit(klay, from, address, value, iban.client(), callback);
+    vini.icapNamereg().addr(iban.institution(), function (err, address) {
+        return deposit(vini, from, address, value, iban.client(), callback);
     });
 
 };
@@ -7184,8 +7184,8 @@ var transfer = function (klay, from, to, value, callback) {
  * @param {Value} value to be tranfered
  * @param {Function} callback, callback
  */
-var transferToAddress = function (klay, from, to, value, callback) {
-    return klay.sendTransaction({
+var transferToAddress = function (vini, from, to, value, callback) {
+    return vini.sendTransaction({
         address: to,
         from: from,
         value: value
@@ -7204,7 +7204,7 @@ var transferToAddress = function (klay, from, to, value, callback) {
  */
 var deposit = function (v, from, to, value, client, callback) {
     var abi = exchangeAbi;
-    return klay.contract(abi).at(to).deposit(client, {
+    return vini.contract(abi).at(to).deposit(client, {
         from: from,
         value: value
     }, callback);

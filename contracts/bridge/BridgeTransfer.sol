@@ -36,7 +36,7 @@ contract BridgeTransfer is BridgeHandledRequests, BridgeFee, BridgeOperator {
     using SafeMath for uint256;
 
     enum TokenType {
-        KLAY,
+        VINI,
         ERC20,
         ERC721
     }
@@ -55,11 +55,11 @@ contract BridgeTransfer is BridgeHandledRequests, BridgeFee, BridgeOperator {
 
     /**
      * Event to log the request value transfer from the Bridge.
-     * @param tokenType is the type of tokens (KLAY/ERC20/ERC721).
+     * @param tokenType is the type of tokens (VINI/ERC20/ERC721).
      * @param from is the requester of the request value transfer event.
      * @param to is the receiver of the value.
      * @param tokenAddress Address of token contract the token belong to.
-     * @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.
+     * @param valueOrTokenId is the value of VINI/ERC20 or token ID of ERC721.
      * @param requestNonce is the order number of the request value transfer.
      * @param fee is fee of value transfer.
      * @param extraData is additional data for specific purpose of a service provider.
@@ -77,11 +77,11 @@ contract BridgeTransfer is BridgeHandledRequests, BridgeFee, BridgeOperator {
 
     /**
      * Event to log the request value transfer from the Bridge.
-     * @param tokenType is the type of tokens (KLAY/ERC20/ERC721).
+     * @param tokenType is the type of tokens (VINI/ERC20/ERC721).
      * @param from is the requester of the request value transfer event.
      * @param to is the receiver of the value.
      * @param tokenAddress Address of token contract the token belong to.
-     * @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.
+     * @param valueOrTokenId is the value of VINI/ERC20 or token ID of ERC721.
      * @param requestNonce is the order number of the request value transfer.
      * @param fee is fee of value transfer.
      * @param extraData is additional data for specific purpose of a service provider.
@@ -104,11 +104,11 @@ contract BridgeTransfer is BridgeHandledRequests, BridgeFee, BridgeOperator {
     /**
      * Event to log the handle value transfer from the Bridge.
      * @param requestTxHash is a transaction hash of request value transfer.
-     * @param tokenType is the type of tokens (KLAY/ERC20/ERC721).
+     * @param tokenType is the type of tokens (VINI/ERC20/ERC721).
      * @param from is an address of the account who requested the value transfer.
      * @param to is an address of the account who will received the value.
      * @param tokenAddress Address of token contract the token belong to.
-     * @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.
+     * @param valueOrTokenId is the value of VINI/ERC20 or token ID of ERC721.
      * @param handleNonce is the order number of the handle value transfer.
      * @param extraData is additional data for specific purpose of a service provider.
      */

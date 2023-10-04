@@ -90,13 +90,13 @@ func Env() Environment {
 func LocalEnv() Environment {
 	env := applyEnvFlags(Environment{Name: "local", Repo: "klaytn/klaytn"})
 
-	if os.Getenv("KLAYTN_RACE_DETECT") == "1" {
+	if os.Getenv("VINITN_RACE_DETECT") == "1" {
 		env.IsKlaytnRaceDetectionOn = true
 	}
-	if os.Getenv("KLAYTN_STATIC_LINK") == "1" {
+	if os.Getenv("VINITN_STATIC_LINK") == "1" {
 		env.IsStaticLink = true
 	}
-	if os.Getenv("KLAYTN_DISABLE_SYMBOL") == "1" {
+	if os.Getenv("VINITN_DISABLE_SYMBOL") == "1" {
 		env.IsDisabledSymbolTable = true
 	}
 

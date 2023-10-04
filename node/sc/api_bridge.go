@@ -454,8 +454,8 @@ func (sb *SubBridgeAPI) SetERC20Fee(bridgeAddr, tokenAddr common.Address, fee *b
 	return sb.subBridge.bridgeManager.SetERC20Fee(bridgeAddr, tokenAddr, fee)
 }
 
-func (sb *SubBridgeAPI) SetKLAYFee(bridgeAddr common.Address, fee *big.Int) (common.Hash, error) {
-	return sb.subBridge.bridgeManager.SetKLAYFee(bridgeAddr, fee)
+func (sb *SubBridgeAPI) SetVINIFee(bridgeAddr common.Address, fee *big.Int) (common.Hash, error) {
+	return sb.subBridge.bridgeManager.SetVINIFee(bridgeAddr, fee)
 }
 
 func (sb *SubBridgeAPI) SetFeeReceiver(bridgeAddr, receiver common.Address) (common.Hash, error) {
@@ -466,8 +466,8 @@ func (sb *SubBridgeAPI) GetERC20Fee(bridgeAddr, tokenAddr common.Address) (*big.
 	return sb.subBridge.bridgeManager.GetERC20Fee(bridgeAddr, tokenAddr)
 }
 
-func (sb *SubBridgeAPI) GetKLAYFee(bridgeAddr common.Address) (*big.Int, error) {
-	return sb.subBridge.bridgeManager.GetKLAYFee(bridgeAddr)
+func (sb *SubBridgeAPI) GetVINIFee(bridgeAddr common.Address) (*big.Int, error) {
+	return sb.subBridge.bridgeManager.GetVINIFee(bridgeAddr)
 }
 
 func (sb *SubBridgeAPI) GetFeeReceiver(bridgeAddr common.Address) (common.Address, error) {

@@ -127,7 +127,7 @@ commands:
             else
               echo "this is not RC version"
             fi
-            echo "export KLAYTN_VERSION=$(go run build/rpm/main.go version)" >> $BASH_ENV
+            echo "export VINITN_VERSION=$(go run build/rpm/main.go version)" >> $BASH_ENV
   build-packaging:
     description: "Build for each OS/Network"
     parameters:
@@ -159,8 +159,8 @@ commands:
           command: |
             export GOPATH=~/go
             export PATH=$HOME/go1.20.6/go/bin:$PATH
-            KLAYTN_VERSION=$(go run build/rpm/main.go version)
-            for item in << parameters.item >>; do aws s3 cp packages/${item}-*.tar.gz s3://$FRONTEND_BUCKET/packages/klaytn/$KLAYTN_VERSION/; done
+            VINITN_VERSION=$(go run build/rpm/main.go version)
+            for item in << parameters.item >>; do aws s3 cp packages/${item}-*.tar.gz s3://$FRONTEND_BUCKET/packages/klaytn/$VINITN_VERSION/; done
   rpm-tagging:
     description: "rpm tagging for cypress"
     steps:
@@ -174,12 +174,12 @@ commands:
           name: "upload S3 repo"
           command: |
             PLATFORM_SUFFIX=$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)
-            KLAYTN_VERSION=$(go run build/rpm/main.go version)
+            VINITN_VERSION=$(go run build/rpm/main.go version)
 
             for item in kcn kpn ken kscn kspn ksen kbn kgen homi; do
               TARGET_RPM=$(find $item-linux-x86_64/rpmbuild/RPMS/x86_64/ | awk -v pat="$item(d)?-v" '$0~pat')
               aws s3 cp $TARGET_RPM s3://$FRONTEND_BUCKET/packages/rhel/7/prod/
-              aws s3 cp $TARGET_RPM s3://$FRONTEND_BUCKET/packages/klaytn/$KLAYTN_VERSION/
+              aws s3 cp $TARGET_RPM s3://$FRONTEND_BUCKET/packages/klaytn/$VINITN_VERSION/
             done
   rpm-tagging-baobab:
     description: "rpm tagging for baobab"
@@ -196,7 +196,7 @@ commands:
             for item in kcn kpn ken; do
               TARGET_RPM=$(find $item-linux-x86_64/rpmbuild/RPMS/x86_64/ | awk -v pat="$item(d)?-baobab-v" '$0~pat')
               aws s3 cp $TARGET_RPM s3://$FRONTEND_BUCKET/packages/rhel/7/prod/
-              aws s3 cp $TARGET_RPM s3://$FRONTEND_BUCKET/packages/klaytn/$KLAYTN_VERSION/
+              aws s3 cp $TARGET_RPM s3://$FRONTEND_BUCKET/packages/klaytn/$VINITN_VERSION/
             done
   createrepo-update:
     steps:
@@ -212,9 +212,9 @@ commands:
           name: "Verify tag and file version match"
           command: |
             echo "tag version is " $CIRCLE_TAG
-            KLAYTN_VERSION=$(go run build/rpm/main.go version)
-            echo "version on version.go" $KLAYTN_VERSION
-            if [ $KLAYTN_VERSION == ${CIRCLE_TAG%-*} ]; then
+            VINITN_VERSION=$(go run build/rpm/main.go version)
+            echo "version on version.go" $VINITN_VERSION
+            if [ $VINITN_VERSION == ${CIRCLE_TAG%-*} ]; then
               echo "verification pass"
             else
               echo "It's not same version."

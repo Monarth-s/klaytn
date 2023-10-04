@@ -303,12 +303,12 @@ contract CnStakingContract {
         confirmRequest(id, requestMap[id].functionId, requestMap[id].firstArg, requestMap[id].secondArg, requestMap[id].thirdArg);
     }
 
-    /// @notice submit a request to withdraw staked KLAY (multi-sig operation).
+    /// @notice submit a request to withdraw staked VINI (multi-sig operation).
     ///         7 days after "approveStakingWithdrawal" has been requested,
     ///         admins can call this function for actual withdrawal for another 7-day period.
-    ///         If the admin doesn't withraw KLAY for that 7-day period, it expires.
-    /// @param _to target address to receive KLAY
-    /// @param _value withdrawl amount of KLAY
+    ///         If the admin doesn't withraw VINI for that 7-day period, it expires.
+    /// @param _to target address to receive VINI
+    /// @param _value withdrawl amount of VINI
     function submitApproveStakingWithdrawal(address _to, uint256 _value) external
     afterInit()
     notNull(_to)
@@ -319,7 +319,7 @@ contract CnStakingContract {
         confirmRequest(id, requestMap[id].functionId, requestMap[id].firstArg, requestMap[id].secondArg, requestMap[id].thirdArg);
     }
 
-    /// @notice submit a request to cancel KLAY withdrawl request (multi-sig operation).
+    /// @notice submit a request to cancel VINI withdrawl request (multi-sig operation).
     /// @param _approvedWithdrawalId the withdrawal ID to cancel. The ID is acquired at the event log of ApproveStakingWithdrawal
     function submitCancelApprovedStakingWithdrawal(uint256 _approvedWithdrawalId) external
     afterInit()
@@ -521,7 +521,7 @@ contract CnStakingContract {
     /*
      * Public functions
      */
-    /// @notice stake KLAY
+    /// @notice stake VINI
     function stakeKlay() external payable 
     afterInit() {
         require(msg.value > 0, "Invalid amount.");
@@ -529,7 +529,7 @@ contract CnStakingContract {
         emit StakeKlay(msg.sender, msg.value);
     }
 
-    /// @notice stake KLAY fallback function
+    /// @notice stake VINI fallback function
     function () external payable 
     afterInit() {
         require(msg.value > 0, "Invalid amount.");
@@ -777,7 +777,7 @@ contract CnStakingContract {
 
     /// @notice get details of approved staking withdrawal
     /// @param _index staking withdrawal ID
-    /// @return withdrawal target address, wthdrawal KLAY value, time when it becomes available, withdrawal request state
+    /// @return withdrawal target address, wthdrawal VINI value, time when it becomes available, withdrawal request state
     function getApprovedStakingWithdrawalInfo(uint256 _index) external view returns(address, uint256, uint256, WithdrawalStakingState) {
         return (
             withdrawalRequestMap[_index].to,

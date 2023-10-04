@@ -42,7 +42,7 @@ func prepareSimulatedContract(t *testing.T) ([]*bind.TransactOpts, *backends.Sim
 		account := bind.NewKeyedTransactor(key)
 		account.GasLimit = 10000000
 		accounts = append(accounts, account)
-		alloc[account.From] = blockchain.GenesisAccount{Balance: big.NewInt(params.KLAY)}
+		alloc[account.From] = blockchain.GenesisAccount{Balance: big.NewInt(params.VINI)}
 	}
 	config := &params.ChainConfig{}
 	config.SetDefaults()

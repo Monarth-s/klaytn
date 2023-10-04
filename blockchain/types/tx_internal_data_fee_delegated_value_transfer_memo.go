@@ -33,7 +33,7 @@ import (
 	"github.com/Monarth-s/klaytn/rlp"
 )
 
-// TxInternalDataFeeDelegatedValueTransferMemo represents a fee-delegated transaction transferring KLAY.
+// TxInternalDataFeeDelegatedValueTransferMemo represents a fee-delegated transaction transferring VINI.
 type TxInternalDataFeeDelegatedValueTransferMemo struct {
 	AccountNonce uint64
 	Price        *big.Int

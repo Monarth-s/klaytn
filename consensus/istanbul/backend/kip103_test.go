@@ -68,15 +68,15 @@ func TestRebalanceTreasury(t *testing.T) {
 	}{
 		{
 			addr:    common.HexToAddress("0x9712f943b296758aaae79944ec975884188d3a96"),
-			balance: new(big.Int).Mul(big.NewInt(1000000), big.NewInt(params.KLAY)),
+			balance: new(big.Int).Mul(big.NewInt(1000000), big.NewInt(params.VINI)),
 		},
 		{
 			addr:    common.HexToAddress("0x5aaeb6053f3e94c9b9a09f33669435e7ef1beaed"),
-			balance: new(big.Int).Mul(big.NewInt(700000), big.NewInt(params.KLAY)),
+			balance: new(big.Int).Mul(big.NewInt(700000), big.NewInt(params.VINI)),
 		},
 		{
 			addr:    common.HexToAddress("0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359"),
-			balance: new(big.Int).Mul(big.NewInt(12345), big.NewInt(params.KLAY)),
+			balance: new(big.Int).Mul(big.NewInt(12345), big.NewInt(params.VINI)),
 		},
 	}
 
@@ -92,9 +92,9 @@ func TestRebalanceTreasury(t *testing.T) {
 	defaultReturnMap["retirees2"] = []interface{}{retireds[2].addr}
 
 	defaultReturnMap["getNewbieCount"] = []interface{}{big.NewInt(3)}
-	defaultReturnMap["newbies0"] = []interface{}{common.HexToAddress("0x819104a190255e0cedbdd9d5f59a557633d79db1"), new(big.Int).Mul(big.NewInt(1000000), big.NewInt(params.KLAY))}
-	defaultReturnMap["newbies1"] = []interface{}{common.HexToAddress("0x75c3098be5e4b63fbac05838daaee378dd48098d"), new(big.Int).Mul(big.NewInt(500000), big.NewInt(params.KLAY))}
-	defaultReturnMap["newbies2"] = []interface{}{common.HexToAddress("0xceB7ADDFBa9665d8767173D47dE4453D7b7B900D"), new(big.Int).Mul(big.NewInt(123412), big.NewInt(params.KLAY))}
+	defaultReturnMap["newbies0"] = []interface{}{common.HexToAddress("0x819104a190255e0cedbdd9d5f59a557633d79db1"), new(big.Int).Mul(big.NewInt(1000000), big.NewInt(params.VINI))}
+	defaultReturnMap["newbies1"] = []interface{}{common.HexToAddress("0x75c3098be5e4b63fbac05838daaee378dd48098d"), new(big.Int).Mul(big.NewInt(500000), big.NewInt(params.VINI))}
+	defaultReturnMap["newbies2"] = []interface{}{common.HexToAddress("0xceB7ADDFBa9665d8767173D47dE4453D7b7B900D"), new(big.Int).Mul(big.NewInt(123412), big.NewInt(params.VINI))}
 
 	defaultReturnMap["rebalanceBlockNumber"] = []interface{}{block.Number()}
 	defaultReturnMap["status"] = []interface{}{uint8(2)}

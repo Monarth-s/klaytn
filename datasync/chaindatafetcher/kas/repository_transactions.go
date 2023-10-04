@@ -188,7 +188,7 @@ func (r *repository) bulkInsertTransactions(txs []*Tx) error {
 	}
 
 	rawQuery := `
-			INSERT INTO klay_transfers(transactionId, fromAddr, toAddr, value, transactionHash, status, timestamp, typeInt, gasPrice, gasUsed, feePayer, feeRatio, internal)
+			INSERT INTO vini_transfers(transactionId, fromAddr, toAddr, value, transactionHash, status, timestamp, typeInt, gasPrice, gasUsed, feePayer, feeRatio, internal)
 			VALUES %s
 			ON DUPLICATE KEY
 			UPDATE transactionId=transactionId`

@@ -16,13 +16,13 @@
 
 pragma solidity 0.5.6;
 
-import "./BridgeTransferKLAY.sol";
+import "./BridgeTransferVINI.sol";
 import "./BridgeTransferERC20.sol";
 import "./BridgeTransferERC721.sol";
 import "./BridgeCounterPart.sol";
 
 
-contract Bridge is BridgeCounterPart, BridgeTransferKLAY, BridgeTransferERC20, BridgeTransferERC721 {
+contract Bridge is BridgeCounterPart, BridgeTransferVINI, BridgeTransferERC20, BridgeTransferERC721 {
     uint64 public constant VERSION = 1;
 
     constructor(bool _modeMintBurn) BridgeTransfer(_modeMintBurn) public payable {

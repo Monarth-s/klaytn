@@ -531,11 +531,11 @@ func TestDefaultTxsWithDefaultAccountKey(t *testing.T) {
 			fmt.Println("senderAddr = ", sender.Addr.String())
 		}
 
-		// send KLAY to sender
+		// send VINI to sender
 		{
 			var txs types.Transactions
 
-			amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+			amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 			tx := types.NewTransaction(reservoir.GetNonce(),
 				sender.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -687,7 +687,7 @@ func TestAccountUpdateMultiSigKeyMaxKey(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -801,7 +801,7 @@ func TestAccountUpdateMultiSigKeyBigThreshold(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -912,7 +912,7 @@ func TestAccountUpdateMultiSigKeyDupPrvKeys(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1028,7 +1028,7 @@ func TestAccountUpdateMultiSigKeyWeightOverflow(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1127,7 +1127,7 @@ func TestAccountUpdateRoleBasedKeyInvalidNumKey(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1272,7 +1272,7 @@ func TestAccountUpdateRoleBasedKeyInvalidTypeKey(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1542,7 +1542,7 @@ func TestAccountUpdateRoleBasedKey(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1729,7 +1729,7 @@ func TestAccountUpdateRoleBasedKeyNested(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1903,7 +1903,7 @@ func TestRoleBasedKeySendTx(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			roleBased.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -2108,7 +2108,7 @@ func TestRoleBasedKeyFeeDelegation(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			roleBased.Addr, amount, gasLimit, gasPrice, []byte{})
 

@@ -2463,7 +2463,7 @@ func testEstimateGas(t *testing.T, mockBackend *mock_api.MockBackend, fnEstimate
 		account2 = common.HexToAddress("0xbbbb")
 		account3 = common.HexToAddress("0xcccc")
 		gspec    = &blockchain.Genesis{Alloc: blockchain.GenesisAlloc{
-			account1: {Balance: big.NewInt(params.KLAY * 2)},
+			account1: {Balance: big.NewInt(params.VINI * 2)},
 			account2: {Balance: common.Big0},
 			account3: {Balance: common.Big0, Code: hexutil.MustDecode(codeRevertHello)},
 		}, Config: chainConfig}
@@ -2476,9 +2476,9 @@ func testEstimateGas(t *testing.T, mockBackend *mock_api.MockBackend, fnEstimate
 		chain  = &testChainContext{header: header}
 
 		// tx arguments
-		KLAY     = hexutil.Big(*big.NewInt(params.KLAY))
-		mKLAY    = hexutil.Big(*big.NewInt(params.KLAY / 1000))
-		KLAY2_1  = hexutil.Big(*big.NewInt(params.KLAY*2 + 1))
+		VINI     = hexutil.Big(*big.NewInt(params.VINI))
+		mVINI    = hexutil.Big(*big.NewInt(params.VINI / 1000))
+		VINI2_1  = hexutil.Big(*big.NewInt(params.VINI*2 + 1))
 		gas1000  = hexutil.Uint64(1000)
 		gas40000 = hexutil.Uint64(40000)
 		baddata  = hexutil.Bytes(hexutil.MustDecode("0xdeadbeef"))
@@ -2512,42 +2512,42 @@ func testEstimateGas(t *testing.T, mockBackend *mock_api.MockBackend, fnEstimate
 			args: EthTransactionArgs{
 				From:  &account1,
 				To:    &account2,
-				Value: &KLAY,
+				Value: &VINI,
 			},
 			expectGas: 21000,
 		},
 		{ // simple transfer with insufficient funds with zero gasPrice
 			args: EthTransactionArgs{
-				From:  &account2, // sender has 0 KLAY
+				From:  &account2, // sender has 0 VINI
 				To:    &account1,
-				Value: &KLAY, // transfer 1 KLAY
+				Value: &VINI, // transfer 1 VINI
 			},
 			expectErr: "insufficient balance for transfer",
 		},
 		{ // simple transfer with slightly insufficient funds with zero gasPrice
 			// this testcase is to check whether the gas prefunded in EthDoCall is not too much
 			args: EthTransactionArgs{
-				From:  &account1, // sender has 2 KLAY
+				From:  &account1, // sender has 2 VINI
 				To:    &account2,
-				Value: &KLAY2_1, // transfer 2.0000...1 KLAY
+				Value: &VINI2_1, // transfer 2.0000...1 VINI
 			},
 			expectErr: "insufficient balance for transfer",
 		},
 		{ // simple transfer with insufficient funds with nonzero gasPrice
 			args: EthTransactionArgs{
-				From:     &account2, // sender has 0 KLAY
+				From:     &account2, // sender has 0 VINI
 				To:       &account1,
-				Value:    &KLAY, // transfer 1 KLAY
-				GasPrice: &mKLAY,
+				Value:    &VINI, // transfer 1 VINI
+				GasPrice: &mVINI,
 			},
 			expectErr: "insufficient funds for transfer",
 		},
 		{ // simple transfer too high gasPrice
 			args: EthTransactionArgs{
-				From:     &account1, // sender has 2 KLAY
+				From:     &account1, // sender has 2 VINI
 				To:       &account2,
-				Value:    &KLAY,  // transfer 1 KLAY
-				GasPrice: &mKLAY, // allowance = (2 - 1) / 0.001 = 1000 gas
+				Value:    &VINI,  // transfer 1 VINI
+				GasPrice: &mVINI, // allowance = (2 - 1) / 0.001 = 1000 gas
 			},
 			expectErr: "gas required exceeds allowance",
 		},

@@ -131,11 +131,11 @@ func TestGasCalculation(t *testing.T) {
 	signer := types.LatestSignerForChainID(bcdata.bc.Config().ChainID)
 	gasPrice := new(big.Int).SetUint64(bcdata.bc.Config().UnitPrice)
 
-	// Preparing step. Send KLAY to a KlaytnAcount.
+	// Preparing step. Send VINI to a KlaytnAcount.
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.GetNonce(),
 			accountTypes[0].account.GetAddr(), amount, gasLimit, gasPrice, []byte{})
 
@@ -149,7 +149,7 @@ func TestGasCalculation(t *testing.T) {
 		reservoir.AddNonce()
 	}
 
-	// Preparing step. Send KLAY to KlaytnAcounts.
+	// Preparing step. Send VINI to KlaytnAcounts.
 	for i := 1; i < len(accountTypes); i++ {
 		// create an account which account key will be replaced to one of account key types.
 		anon, err := createAnonymousAccount(getRandomPrivateKeyString(t))
@@ -158,7 +158,7 @@ func TestGasCalculation(t *testing.T) {
 		{
 			var txs types.Transactions
 
-			amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+			amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 			tx := types.NewTransaction(reservoir.GetNonce(),
 				anon.Addr, amount, gasLimit, gasPrice, []byte{})
 

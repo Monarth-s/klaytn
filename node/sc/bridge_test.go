@@ -66,7 +66,7 @@ func WaitMined(tx *types.Transaction, backend bind.DeployBackend, t *testing.T) 
 	return nil
 }
 
-// TransferSignedTx sends the transaction to transfer KLAY from auth to `to` and waits the execution of the transaction.
+// TransferSignedTx sends the transaction to transfer VINI from auth to `to` and waits the execution of the transaction.
 func TransferSignedTx(auth *bind.TransactOpts, backend *backends.SimulatedBackend, to common.Address, value *big.Int, t *testing.T) (common.Hash, *big.Int, error) {
 	ctx := context.Background()
 
@@ -109,30 +109,30 @@ func TransferSignedTx(auth *bind.TransactOpts, backend *backends.SimulatedBacken
 	return tx.Hash(), fee, nil
 }
 
-// RequestKLAYTransfer sends a requestValueTransfer transaction to the bridge contract.
-func RequestKLAYTransfer(b *bridge.Bridge, auth *bind.TransactOpts, to common.Address, value uint64, t *testing.T) {
-	_, err := b.RequestKLAYTransfer(&bind.TransactOpts{From: auth.From, Signer: auth.Signer, GasLimit: DefaultBridgeTxGasLimit, Value: new(big.Int).SetUint64(value)}, to, new(big.Int).SetUint64(value), nil)
+// RequestVINITransfer sends a requestValueTransfer transaction to the bridge contract.
+func RequestVINITransfer(b *bridge.Bridge, auth *bind.TransactOpts, to common.Address, value uint64, t *testing.T) {
+	_, err := b.RequestVINITransfer(&bind.TransactOpts{From: auth.From, Signer: auth.Signer, GasLimit: DefaultBridgeTxGasLimit, Value: new(big.Int).SetUint64(value)}, to, new(big.Int).SetUint64(value), nil)
 	if err != nil {
-		t.Fatalf("fail to RequestKLAYTransfer %v", err)
+		t.Fatalf("fail to RequestVINITransfer %v", err)
 	}
 }
 
-// SendHandleKLAYTransfer send a handleValueTransfer transaction to the bridge contract.
-func SendHandleKLAYTransfer(b *bridge.Bridge, auth *bind.TransactOpts, to common.Address, value uint64, nonce uint64, blockNum uint64, t *testing.T) *types.Transaction {
-	tx, err := b.HandleKLAYTransfer(&bind.TransactOpts{From: auth.From, Signer: auth.Signer, GasLimit: DefaultBridgeTxGasLimit}, common.Hash{10}, common.Address{0}, to, big.NewInt(int64(value)), nonce, blockNum, nil)
+// SendHandleVINITransfer send a handleValueTransfer transaction to the bridge contract.
+func SendHandleVINITransfer(b *bridge.Bridge, auth *bind.TransactOpts, to common.Address, value uint64, nonce uint64, blockNum uint64, t *testing.T) *types.Transaction {
+	tx, err := b.HandleVINITransfer(&bind.TransactOpts{From: auth.From, Signer: auth.Signer, GasLimit: DefaultBridgeTxGasLimit}, common.Hash{10}, common.Address{0}, to, big.NewInt(int64(value)), nonce, blockNum, nil)
 	if err != nil {
-		t.Fatalf("fail to SendHandleKLAYTransfer %v", err)
+		t.Fatalf("fail to SendHandleVINITransfer %v", err)
 		return nil
 	}
 	return tx
 }
 
-// TestBridgeDeployWithKLAY checks to the state/contract balance of the bridge deployed.
-func TestBridgeDeployWithKLAY(t *testing.T) {
+// TestBridgeDeployWithVINI checks to the state/contract balance of the bridge deployed.
+func TestBridgeDeployWithVINI(t *testing.T) {
 	bridgeAccountKey, _ := crypto.GenerateKey()
 	bridgeAccount := bind.NewKeyedTransactor(bridgeAccountKey)
 
-	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.VINI)}}
 	backend := backends.NewSimulatedBackend(alloc)
 	defer backend.Close()
 
@@ -147,7 +147,7 @@ func TestBridgeDeployWithKLAY(t *testing.T) {
 
 	balanceContract, err := backend.BalanceAt(nil, bridgeAddress, nil)
 	if err != nil {
-		t.Fatalf("fail to GetKLAY %v", err)
+		t.Fatalf("fail to GetVINI %v", err)
 	}
 
 	balanceState, err := backend.BalanceAt(context.Background(), bridgeAddress, nil)
@@ -167,7 +167,7 @@ func TestBridgeRequestValueTransferNonce(t *testing.T) {
 	testAccKey, _ := crypto.GenerateKey()
 	testAcc := bind.NewKeyedTransactor(testAccKey)
 
-	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.VINI)}}
 	backend := backends.NewSimulatedBackend(alloc)
 	defer backend.Close()
 
@@ -189,7 +189,7 @@ func TestBridgeRequestValueTransferNonce(t *testing.T) {
 	}
 	t.Log("2. Bridge is subscribed.")
 
-	RequestKLAYTransfer(b, bridgeAccount, testAcc.From, 1, t)
+	RequestVINITransfer(b, bridgeAccount, testAcc.From, 1, t)
 	backend.Commit()
 
 	expectedNonce := uint64(0)
@@ -206,7 +206,7 @@ loop:
 			expectedNonce++
 
 			// TODO-Klaytn added more request token/NFT transfer cases,
-			RequestKLAYTransfer(b, bridgeAccount, testAcc.From, 1, t)
+			RequestVINITransfer(b, bridgeAccount, testAcc.From, 1, t)
 			backend.Commit()
 
 		case err := <-requestSub.Err():
@@ -233,7 +233,7 @@ func TestBridgeHandleValueTransferNonceAndBlockNumber(t *testing.T) {
 	testAccKey, _ := crypto.GenerateKey()
 	testAcc := bind.NewKeyedTransactor(testAccKey)
 
-	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.VINI)}}
 	backend := backends.NewSimulatedBackend(alloc)
 	defer backend.Close()
 
@@ -257,7 +257,7 @@ func TestBridgeHandleValueTransferNonceAndBlockNumber(t *testing.T) {
 	assert.NoError(t, err)
 	defer handleSub.Unsubscribe()
 	if err != nil {
-		t.Fatalf("fail to DepositKLAY %v", err)
+		t.Fatalf("fail to DepositVINI %v", err)
 	}
 	t.Log("2. Bridge is subscribed.")
 
@@ -266,7 +266,7 @@ func TestBridgeHandleValueTransferNonceAndBlockNumber(t *testing.T) {
 	testCount := uint64(1000)
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
-	tx = SendHandleKLAYTransfer(b, bridgeAccount, testAcc.From, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(b, bridgeAccount, testAcc.From, transferAmount, sentNonce, sentBlockNumber, t)
 	backend.Commit()
 
 	timeoutContext, cancelTimeout := context.WithTimeout(context.Background(), timeOut)
@@ -296,7 +296,7 @@ loop:
 			sentNonce++
 			sentBlockNumber++
 
-			SendHandleKLAYTransfer(b, bridgeAccount, testAcc.From, transferAmount, sentNonce, sentBlockNumber, t)
+			SendHandleVINITransfer(b, bridgeAccount, testAcc.From, transferAmount, sentNonce, sentBlockNumber, t)
 			backend.Commit()
 
 			resultBlockNumber, err := b.RecoveryBlockNumber(nil)
@@ -326,7 +326,7 @@ func TestBridgePublicVariables(t *testing.T) {
 	bridgeAccountKey, _ := crypto.GenerateKey()
 	bridgeAccount := bind.NewKeyedTransactor(bridgeAccountKey)
 
-	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.VINI)}}
 	backend := backends.NewSimulatedBackend(alloc)
 	defer backend.Close()
 
@@ -395,7 +395,7 @@ func TestExtendedBridgeAndCallbackERC20(t *testing.T) {
 	bobKey, _ := crypto.GenerateKey()
 	bobAcc := bind.NewKeyedTransactor(bobKey)
 
-	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.VINI)}}
 	backend := backends.NewSimulatedBackend(alloc)
 	defer backend.Close()
 
@@ -541,7 +541,7 @@ func TestExtendedBridgeAndCallbackERC721(t *testing.T) {
 	bobKey, _ := crypto.GenerateKey()
 	bobAcc := bind.NewKeyedTransactor(bobKey)
 
-	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{bridgeAccount.From: {Balance: big.NewInt(params.VINI)}}
 	backend := backends.NewSimulatedBackend(alloc)
 	defer backend.Close()
 
@@ -710,7 +710,7 @@ func generateBridgeTokenTestEnv(t *testing.T) *bridgeTokenTestENV {
 	tester := bind.NewKeyedTransactor(testKey)
 	tester.GasLimit = DefaultBridgeTxGasLimit
 
-	alloc := blockchain.GenesisAlloc{operator.From: {Balance: big.NewInt(params.KLAY)}, tester.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{operator.From: {Balance: big.NewInt(params.VINI)}, tester.From: {Balance: big.NewInt(params.VINI)}}
 	backend := backends.NewSimulatedBackend(alloc)
 
 	// Deploy Bridge
@@ -867,7 +867,7 @@ func TestBridgeContract_InitStatus(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, false, isLocked)
 
-	isLocked, err = b.IsLockedKLAY(nil)
+	isLocked, err = b.IsLockedVINI(nil)
 	assert.NoError(t, err)
 	assert.Equal(t, false, isLocked)
 }
@@ -897,7 +897,7 @@ func TestBridgeContract_InitRequest(t *testing.T) {
 	assert.Nil(t, bind.CheckWaitMined(backend, tx))
 
 	tester.Value = big.NewInt(1)
-	tx, err = b.RequestKLAYTransfer(tester, tester.From, big.NewInt(1), nil)
+	tx, err = b.RequestVINITransfer(tester, tester.From, big.NewInt(1), nil)
 	assert.NoError(t, err)
 	backend.Commit()
 	assert.Nil(t, bind.CheckWaitMined(backend, tx))
@@ -930,7 +930,7 @@ func TestBridgeContract_TokenLock(t *testing.T) {
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 
-	tx, err = b.LockKLAY(operator)
+	tx, err = b.LockVINI(operator)
 	assert.NoError(t, err)
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
@@ -944,7 +944,7 @@ func TestBridgeContract_TokenLock(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, true, isLocked)
 
-	isLocked, err = b.IsLockedKLAY(nil)
+	isLocked, err = b.IsLockedVINI(nil)
 	assert.NoError(t, err)
 	assert.Equal(t, true, isLocked)
 
@@ -960,7 +960,7 @@ func TestBridgeContract_TokenLock(t *testing.T) {
 	assert.NotNil(t, bind.CheckWaitMined(backend, tx))
 
 	tester.Value = big.NewInt(1)
-	tx, err = b.RequestKLAYTransfer(tester, tester.From, big.NewInt(1), nil)
+	tx, err = b.RequestVINITransfer(tester, tester.From, big.NewInt(1), nil)
 	assert.NoError(t, err)
 	backend.Commit()
 	assert.NotNil(t, bind.CheckWaitMined(backend, tx))
@@ -991,7 +991,7 @@ func TestBridgeContract_TokenLockFail(t *testing.T) {
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
 
-	tx, err = b.LockKLAY(tester)
+	tx, err = b.LockVINI(tester)
 	assert.NoError(t, err)
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
@@ -1014,7 +1014,7 @@ func TestBridgeContract_TokenLockFail(t *testing.T) {
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 
-	tx, err = b.LockKLAY(operator)
+	tx, err = b.LockVINI(operator)
 	assert.NoError(t, err)
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
@@ -1029,7 +1029,7 @@ func TestBridgeContract_TokenLockFail(t *testing.T) {
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
 
-	tx, err = b.LockKLAY(operator)
+	tx, err = b.LockVINI(operator)
 	assert.NoError(t, err)
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
@@ -1065,7 +1065,7 @@ func TestBridgeContract_TokenUnlockFail(t *testing.T) {
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
 
-	tx, err = b.UnlockKLAY(operator)
+	tx, err = b.UnlockVINI(operator)
 	assert.NoError(t, err)
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
@@ -1097,7 +1097,7 @@ func TestBridgeContract_CheckValueTransferAfterUnLock(t *testing.T) {
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 
-	tx, err = b.LockKLAY(operator)
+	tx, err = b.LockVINI(operator)
 	assert.NoError(t, err)
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
@@ -1113,7 +1113,7 @@ func TestBridgeContract_CheckValueTransferAfterUnLock(t *testing.T) {
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 
-	tx, err = b.UnlockKLAY(operator)
+	tx, err = b.UnlockVINI(operator)
 	assert.NoError(t, err)
 	backend.Commit()
 	CheckReceipt(backend, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
@@ -1127,7 +1127,7 @@ func TestBridgeContract_CheckValueTransferAfterUnLock(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, false, isLocked)
 
-	isLocked, err = b.IsLockedKLAY(nil)
+	isLocked, err = b.IsLockedVINI(nil)
 	assert.NoError(t, err)
 	assert.Equal(t, false, isLocked)
 
@@ -1143,7 +1143,7 @@ func TestBridgeContract_CheckValueTransferAfterUnLock(t *testing.T) {
 	assert.Nil(t, bind.CheckWaitMined(backend, tx))
 
 	tester.Value = big.NewInt(1)
-	tx, err = b.RequestKLAYTransfer(tester, tester.From, big.NewInt(1), nil)
+	tx, err = b.RequestVINITransfer(tester, tester.From, big.NewInt(1), nil)
 	assert.NoError(t, err)
 	backend.Commit()
 	assert.Nil(t, bind.CheckWaitMined(backend, tx))
@@ -1166,8 +1166,8 @@ func TestBridgeRequestHandleGasUsed(t *testing.T) {
 
 	// Create Simulated backend
 	alloc := blockchain.GenesisAlloc{
-		alice.From: {Balance: big.NewInt(params.KLAY)},
-		auth.From:  {Balance: big.NewInt(params.KLAY)},
+		alice.From: {Balance: big.NewInt(params.VINI)},
+		auth.From:  {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -1192,7 +1192,7 @@ func TestBridgeRequestHandleGasUsed(t *testing.T) {
 	defer handleValueTransferSub.Unsubscribe()
 
 	handleFunc := func(nonce int) {
-		hTx, err := b.HandleKLAYTransfer(auth, common.HexToHash(strconv.Itoa(nonce)), alice.From, bob.From, big.NewInt(1), uint64(nonce), uint64(1+nonce), nil)
+		hTx, err := b.HandleVINITransfer(auth, common.HexToHash(strconv.Itoa(nonce)), alice.From, bob.From, big.NewInt(1), uint64(nonce), uint64(1+nonce), nil)
 		assert.NoError(t, err)
 		sim.Commit()
 
@@ -1267,8 +1267,8 @@ func TestBridgeMaxOperatorHandleTxGasUsed(t *testing.T) {
 
 	// Create Simulated backend
 	alloc := blockchain.GenesisAlloc{
-		alice.From: {Balance: big.NewInt(params.KLAY)},
-		auth.From:  {Balance: big.NewInt(params.KLAY)},
+		alice.From: {Balance: big.NewInt(params.VINI)},
+		auth.From:  {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -1310,7 +1310,7 @@ func TestBridgeMaxOperatorHandleTxGasUsed(t *testing.T) {
 	defer handleValueTransferSub.Unsubscribe()
 
 	handleFunc := func(a *bind.TransactOpts, nonce int) {
-		hTx, err := b.HandleKLAYTransfer(a, common.HexToHash(strconv.Itoa(nonce)), alice.From, bob.From, big.NewInt(1), uint64(nonce), uint64(1+nonce), nil)
+		hTx, err := b.HandleVINITransfer(a, common.HexToHash(strconv.Itoa(nonce)), alice.From, bob.From, big.NewInt(1), uint64(nonce), uint64(1+nonce), nil)
 		assert.NoError(t, err)
 		sim.Commit()
 
@@ -1350,7 +1350,7 @@ func TestBridgeThresholdLimit(t *testing.T) {
 
 	// Create Simulated backend
 	alloc := blockchain.GenesisAlloc{
-		auth.From: {Balance: big.NewInt(params.KLAY)},
+		auth.From: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()

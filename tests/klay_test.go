@@ -181,7 +181,7 @@ func makeTransactionsToRandom(bcdata *BCData, accountMap *AccountMap, signer typ
 	return txs, nil
 }
 
-// makeTransactionsToRandom makes `numTransactions` transactions which transfers a random amount of KLAY
+// makeTransactionsToRandom makes `numTransactions` transactions which transfers a random amount of VINI
 // from accounts in `AccountMap` to a randomly generated account.
 // It returns the generated transactions if successful, or it returns an error if failed.
 func makeNewTransactionsToRandom(bcdata *BCData, accountMap *AccountMap, signer types.Signer, numTransactions int,
@@ -236,7 +236,7 @@ func makeNewTransactionsToRandom(bcdata *BCData, accountMap *AccountMap, signer 
 	return txs, nil
 }
 
-// makeNewTransactionsToRing makes `numTransactions` transactions which transfers a fixed amount of KLAY
+// makeNewTransactionsToRing makes `numTransactions` transactions which transfers a fixed amount of VINI
 // from account with index i to account with index (i+1). To have same amount of balance before and after the test,
 // total number of transactions should be the multiple of number of addresses.
 // It returns the generated transactions if successful, or it returns an error if failed.

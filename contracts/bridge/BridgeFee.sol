@@ -25,10 +25,10 @@ contract BridgeFee {
     using SafeMath for uint256;
 
     address payable public feeReceiver = address(0);
-    uint256 public feeOfKLAY = 0;
+    uint256 public feeOfVINI = 0;
     mapping (address => uint256) public feeOfERC20;
 
-    event KLAYFeeChanged(uint256 indexed fee);
+    event VINIFeeChanged(uint256 indexed fee);
     event ERC20FeeChanged(address indexed token, uint256 indexed fee);
     event FeeReceiverChanged(address indexed feeReceiver);
 
@@ -36,8 +36,8 @@ contract BridgeFee {
         feeReceiver = _feeReceiver;
     }
 
-    function _payKLAYFeeAndRefundChange(uint256 _feeLimit) internal returns(uint256) {
-        uint256 fee = feeOfKLAY;
+    function _payVINIFeeAndRefundChange(uint256 _feeLimit) internal returns(uint256) {
+        uint256 fee = feeOfVINI;
 
         if (feeReceiver != address(0) && fee > 0) {
             require(_feeLimit >= fee, "insufficient feeLimit");
@@ -72,9 +72,9 @@ contract BridgeFee {
         return 0;
     }
 
-    function _setKLAYFee(uint256 _fee) internal {
-        feeOfKLAY = _fee;
-        emit KLAYFeeChanged(_fee);
+    function _setVINIFee(uint256 _fee) internal {
+        feeOfVINI = _fee;
+        emit VINIFeeChanged(_fee);
     }
 
     function _setERC20Fee(address _token, uint256 _fee) internal {

@@ -20,7 +20,7 @@
 
 package params
 
-// These are the multipliers for KLAY denominations.
+// These are the multipliers for VINI denominations.
 // Example: To get the peb value of an amount in 'ston', use
 //
 //    new(big.Int).Mul(value, big.NewInt(params.Ston))
@@ -31,10 +31,10 @@ const (
 	Mpeb     = 1e6  // same
 	Gpeb     = 1e9  // same
 	Ston     = 1e9  // official notation 'ston'
-	UKLAY    = 1e12 // official notation 'uKLAY'
-	MiliKLAY = 1e15 // official notation 'mKLAY'
-	KLAY     = 1e18 // same
-	KKLAY    = 1e21 // official notation 'kKLAY'
-	MKLAY    = 1e24 // same
-	GKLAY    = 1e27 // same
+	UVINI    = 1e12 // official notation 'uVINI'
+	MiliVINI = 1e15 // official notation 'mVINI'
+	VINI     = 1e18 // same
+	KVINI    = 1e21 // official notation 'kVINI'
+	MVINI    = 1e24 // same
+	GVINI    = 1e27 // same
 )

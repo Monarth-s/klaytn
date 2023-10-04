@@ -93,9 +93,9 @@ func run(evm *EVM, contract *Contract, input []byte) ([]byte, error) {
 // it shouldn't be modified.
 type BlockContext struct {
 	// CanTransfer returns whether the account contains
-	// sufficient KLAY to transfer the value
+	// sufficient VINI to transfer the value
 	CanTransfer CanTransferFunc
-	// Transfer transfers KLAY from one account to the other
+	// Transfer transfers VINI from one account to the other
 	Transfer TransferFunc
 	// GetHash returns the hash corresponding to n
 	GetHash GetHashFunc
@@ -485,7 +485,7 @@ func (evm *EVM) create(caller types.ContractRef, codeAndHash *codeAndHash, gas u
 
 	// Create a new account on the state
 	snapshot := evm.StateDB.Snapshot()
-	// TODO-Klaytn-Accounts: for now, smart contract accounts cannot withdraw KLAYs via ValueTransfer
+	// TODO-Klaytn-Accounts: for now, smart contract accounts cannot withdraw VINIs via ValueTransfer
 	//   because the account key is set to AccountKeyFail by default.
 	//   Need to make a decision of the key type.
 	evm.StateDB.CreateSmartContractAccountWithKey(address, humanReadable, accountkey.NewAccountKeyFail(), codeFormat, evm.chainRules)

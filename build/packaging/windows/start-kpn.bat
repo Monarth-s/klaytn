@@ -7,7 +7,7 @@ call %CONF%\kpn-conf.cmd
 
 REM Check if exist data directory
 set "NOT_INIT="
-IF NOT EXIST %KLAY_HOME% (
+IF NOT EXIST %VINI_HOME% (
     set NOT_INIT=1
 )
 IF NOT EXIST %DATA_DIR% (

@@ -55,7 +55,7 @@ func prepareMultiBridgeTest(t *testing.T) *bridgeTestInfo {
 	accKey, _ := crypto.GenerateKey()
 	acc := bind.NewKeyedTransactor(accKey)
 
-	alloc := blockchain.GenesisAlloc{acc.From: {Balance: big.NewInt(params.KLAY)}}
+	alloc := blockchain.GenesisAlloc{acc.From: {Balance: big.NewInt(params.VINI)}}
 	sim := backends.NewSimulatedBackend(alloc)
 
 	chargeAmount := big.NewInt(10000000)
@@ -77,7 +77,7 @@ func prepareMultiBridgeEventTest(t *testing.T) *multiBridgeTestInfo {
 	for i := 0; i < maxAccounts; i++ {
 		accKey, _ := crypto.GenerateKey()
 		res.accounts[i] = bind.NewKeyedTransactor(accKey)
-		accountMap[res.accounts[i].From] = blockchain.GenesisAccount{Balance: big.NewInt(params.KLAY)}
+		accountMap[res.accounts[i].From] = blockchain.GenesisAccount{Balance: big.NewInt(params.VINI)}
 	}
 
 	res.sim = backends.NewSimulatedBackend(accountMap)
@@ -263,9 +263,9 @@ func TestRegisterDeregisterToken(t *testing.T) {
 	assert.Equal(t, 0, len(allowedTokenList))
 }
 
-// TestMultiBridgeKLAYTransfer1 checks the following:
+// TestMultiBridgeVINITransfer1 checks the following:
 // - successful value transfer with proper transaction counts.
-func TestMultiBridgeKLAYTransfer1(t *testing.T) {
+func TestMultiBridgeVINITransfer1(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -283,12 +283,12 @@ func TestMultiBridgeKLAYTransfer1(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -308,10 +308,10 @@ func TestMultiBridgeKLAYTransfer1(t *testing.T) {
 	}
 }
 
-// TestMultiBridgeKLAYTransfer2 checks the following:
+// TestMultiBridgeVINITransfer2 checks the following:
 // - failed value transfer without proper transaction counts.
 // - timeout is expected since operator threshold will not be satisfied.
-func TestMultiBridgeKLAYTransfer2(t *testing.T) {
+func TestMultiBridgeVINITransfer2(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -329,7 +329,7 @@ func TestMultiBridgeKLAYTransfer2(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -346,10 +346,10 @@ func TestMultiBridgeKLAYTransfer2(t *testing.T) {
 	}
 }
 
-// TestMultiBridgeKLAYTransfer3 checks the following:
+// TestMultiBridgeVINITransfer3 checks the following:
 // - tx is actually handled when operator threshold is satisfied.
 // - no double spending is made due to additional tx.
-func TestMultiBridgeKLAYTransfer3(t *testing.T) {
+func TestMultiBridgeVINITransfer3(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -367,12 +367,12 @@ func TestMultiBridgeKLAYTransfer3(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -380,7 +380,7 @@ func TestMultiBridgeKLAYTransfer3(t *testing.T) {
 		select {
 		case _ = <-info.handleCh:
 			acc = info.accounts[2]
-			tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+			tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 			info.sim.Commit()
 			assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 			return
@@ -525,9 +525,9 @@ func TestMultiBridgeERC721Transfer(t *testing.T) {
 	}
 }
 
-// TestMultiBridgeSetKLAYFee checks the following:
-// - successfully setting KLAY fee
-func TestMultiBridgeSetKLAYFee(t *testing.T) {
+// TestMultiBridgeSetVINIFee checks the following:
+// - successfully setting VINI fee
+func TestMultiBridgeSetVINIFee(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -543,23 +543,23 @@ func TestMultiBridgeSetKLAYFee(t *testing.T) {
 	assert.Nil(t, bind.CheckWaitMined(info.sim, tx))
 
 	opts = &bind.TransactOpts{From: acc.From, Signer: acc.Signer, GasLimit: DefaultBridgeTxGasLimit}
-	tx, err = info.b.SetKLAYFee(opts, big.NewInt(fee), requestNonce)
+	tx, err = info.b.SetVINIFee(opts, big.NewInt(fee), requestNonce)
 	assert.NoError(t, err)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
-	ret, err := info.b.FeeOfKLAY(nil)
+	ret, err := info.b.FeeOfVINI(nil)
 	assert.NoError(t, err)
 	assert.Equal(t, big.NewInt(0).String(), ret.String())
 
 	acc = info.accounts[1]
 	opts = &bind.TransactOpts{From: acc.From, Signer: acc.Signer, GasLimit: DefaultBridgeTxGasLimit}
-	tx, err = info.b.SetKLAYFee(opts, big.NewInt(fee), requestNonce)
+	tx, err = info.b.SetVINIFee(opts, big.NewInt(fee), requestNonce)
 	assert.NoError(t, err)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
-	ret, err = info.b.FeeOfKLAY(nil)
+	ret, err = info.b.FeeOfVINI(nil)
 	assert.NoError(t, err)
 	assert.Equal(t, big.NewInt(fee).String(), ret.String())
 }
@@ -639,7 +639,7 @@ func TestMultiBridgeErrNotOperator1(t *testing.T) {
 	accKey, _ := crypto.GenerateKey()
 	acc := bind.NewKeyedTransactor(accKey)
 
-	tx := SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx := SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 }
@@ -666,14 +666,14 @@ func TestMultiBridgeErrNotOperator2(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	accKey, _ := crypto.GenerateKey()
 	acc = bind.NewKeyedTransactor(accKey)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 }
@@ -700,12 +700,12 @@ func TestMultiBridgeErrInvalTx(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce+1, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce+1, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -743,27 +743,27 @@ func TestMultiBridgeErrOverSign(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[2]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 }
 
-// TestMultiOperatorKLAYTransferDup checks the following:
+// TestMultiOperatorVINITransferDup checks the following:
 // - set threshold to 1.
 // - an operator succeed to handle value transfer.
 // - the operator (same auth) fails to handle value transfer because of vote closing (duplicated).
 // - another operator (different auth) fails to handle value transfer because of vote closing (duplicated).
-func TestMultiOperatorKLAYTransferDup(t *testing.T) {
+func TestMultiOperatorVINITransferDup(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -781,23 +781,23 @@ func TestMultiOperatorKLAYTransferDup(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 }
 
-// TestMultiBridgeSetKLAYFeeErrNonce checks the following:
-// - failed to set KLAY fee because of the wrong nonce.
-func TestMultiBridgeSetKLAYFeeErrNonce(t *testing.T) {
+// TestMultiBridgeSetVINIFeeErrNonce checks the following:
+// - failed to set VINI fee because of the wrong nonce.
+func TestMultiBridgeSetVINIFeeErrNonce(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -813,35 +813,35 @@ func TestMultiBridgeSetKLAYFeeErrNonce(t *testing.T) {
 	assert.Nil(t, bind.CheckWaitMined(info.sim, tx))
 
 	opts = &bind.TransactOpts{From: acc.From, Signer: acc.Signer, GasLimit: DefaultBridgeTxGasLimit}
-	tx, err = info.b.SetKLAYFee(opts, big.NewInt(fee), requestNonce)
+	tx, err = info.b.SetVINIFee(opts, big.NewInt(fee), requestNonce)
 	assert.NoError(t, err)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
-	ret, err := info.b.FeeOfKLAY(nil)
+	ret, err := info.b.FeeOfVINI(nil)
 	assert.NoError(t, err)
 	assert.Equal(t, big.NewInt(0).String(), ret.String())
 
 	acc = info.accounts[1]
 	opts = &bind.TransactOpts{From: acc.From, Signer: acc.Signer, GasLimit: DefaultBridgeTxGasLimit}
-	tx, err = info.b.SetKLAYFee(opts, big.NewInt(fee), requestNonce+1)
+	tx, err = info.b.SetVINIFee(opts, big.NewInt(fee), requestNonce+1)
 	assert.NoError(t, err)
 	info.sim.Commit()
 	assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
 	opts = &bind.TransactOpts{From: acc.From, Signer: acc.Signer, GasLimit: DefaultBridgeTxGasLimit}
-	tx, err = info.b.SetKLAYFee(opts, big.NewInt(fee), requestNonce-1)
+	tx, err = info.b.SetVINIFee(opts, big.NewInt(fee), requestNonce-1)
 	assert.NoError(t, err)
 	info.sim.Commit()
 	assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 }
 
-// TestMultiBridgeKLAYTransferNonceJump checks the following:
+// TestMultiBridgeVINITransferNonceJump checks the following:
 // - set threshold to 2.
 // - first request is not executed yet since one operator does not vote.
 // - jump 100 nonce and successfully handle value transfer.
-func TestMultiBridgeKLAYTransferNonceJump(t *testing.T) {
+func TestMultiBridgeVINITransferNonceJump(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -859,17 +859,17 @@ func TestMultiBridgeKLAYTransferNonceJump(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	sentNonce = sentNonce + 100
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -886,10 +886,10 @@ func TestMultiBridgeKLAYTransferNonceJump(t *testing.T) {
 	}
 }
 
-// TestMultiBridgeKLAYTransferParallel checks the following:
+// TestMultiBridgeVINITransferParallel checks the following:
 // - set threshold to 2.
 // - two different value transfers succeed to handle the value transfer.
-func TestMultiBridgeKLAYTransferParallel(t *testing.T) {
+func TestMultiBridgeVINITransferParallel(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -909,12 +909,12 @@ func TestMultiBridgeKLAYTransferParallel(t *testing.T) {
 
 	go func() {
 		acc := info.accounts[0]
-		tx := SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+		tx := SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 		info.sim.Commit()
 		assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 		acc = info.accounts[1]
-		tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+		tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 		info.sim.Commit()
 		assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 	}()
@@ -922,12 +922,12 @@ func TestMultiBridgeKLAYTransferParallel(t *testing.T) {
 	go func() {
 		acc := info.accounts[2]
 		sentNonce := sentNonce + 20
-		tx := SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+		tx := SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 		info.sim.Commit()
 		assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 		acc = info.accounts[3]
-		tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+		tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 		info.sim.Commit()
 		assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 	}()
@@ -948,12 +948,12 @@ func TestMultiBridgeKLAYTransferParallel(t *testing.T) {
 	}
 }
 
-// TestMultiBridgeKLAYTransferMixConfig1 checks the following:
+// TestMultiBridgeVINITransferMixConfig1 checks the following:
 // - set threshold to 2.
 // - the first tx is done.
 // - set threshold to 1.
 // - the second operator successfully handles the value transfer.
-func TestMultiBridgeKLAYTransferMixConfig1(t *testing.T) {
+func TestMultiBridgeVINITransferMixConfig1(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -971,7 +971,7 @@ func TestMultiBridgeKLAYTransferMixConfig1(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -982,7 +982,7 @@ func TestMultiBridgeKLAYTransferMixConfig1(t *testing.T) {
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -999,12 +999,12 @@ func TestMultiBridgeKLAYTransferMixConfig1(t *testing.T) {
 	}
 }
 
-// TestMultiBridgeKLAYTransferMixConfig2 checks the following:
+// TestMultiBridgeVINITransferMixConfig2 checks the following:
 // - set threshold to 2.
 // - The first tx is done.
 // - set threshold to 3.
 // - remain operators successfully handle the value transfer.
-func TestMultiBridgeKLAYTransferMixConfig2(t *testing.T) {
+func TestMultiBridgeVINITransferMixConfig2(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -1022,7 +1022,7 @@ func TestMultiBridgeKLAYTransferMixConfig2(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -1033,12 +1033,12 @@ func TestMultiBridgeKLAYTransferMixConfig2(t *testing.T) {
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[2]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -1055,12 +1055,12 @@ func TestMultiBridgeKLAYTransferMixConfig2(t *testing.T) {
 	}
 }
 
-// TestMultiBridgeKLAYTransferMixConfig1 checks the following:
+// TestMultiBridgeVINITransferMixConfig1 checks the following:
 // - set threshold to 2.
 // - the first tx is done.
 // - set threshold to 1.
 // - the first operator successfully handles the value transfer if retry.
-func TestMultiBridgeKLAYTransferMixConfig3(t *testing.T) {
+func TestMultiBridgeVINITransferMixConfig3(t *testing.T) {
 	info := prepareMultiBridgeEventTest(t)
 	defer info.sim.Close()
 
@@ -1078,7 +1078,7 @@ func TestMultiBridgeKLAYTransferMixConfig3(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -1088,7 +1088,7 @@ func TestMultiBridgeKLAYTransferMixConfig3(t *testing.T) {
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -1127,12 +1127,12 @@ func TestNoncesAndBlockNumber(t *testing.T) {
 	transferAmount := uint64(100)
 	sentBlockNumber := uint64(100000)
 
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -1152,12 +1152,12 @@ func TestNoncesAndBlockNumber(t *testing.T) {
 	sentNonce++
 	sentBlockNumber = sentBlockNumber + 100
 	acc = info.accounts[0]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
 	acc = info.accounts[1]
-	tx = SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+	tx = SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 	info.sim.Commit()
 	assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -1208,7 +1208,7 @@ func TestNoncesAndBlockNumberUnordered(t *testing.T) {
 		sentNonce := testCases[i].requestNonce
 		sentBlockNumber := testCases[i].requestBlkNum
 		t.Log("test round", "i", i, "nonce", sentNonce, "blk", sentBlockNumber)
-		tx := SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+		tx := SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 		info.sim.Commit()
 		assert.NoError(t, bind.CheckWaitMined(info.sim, tx))
 
@@ -1232,7 +1232,7 @@ func TestNoncesAndBlockNumberUnordered(t *testing.T) {
 		sentNonce := testCases[i].requestNonce
 		sentBlockNumber := testCases[i].requestBlkNum
 		t.Log("test round", "i", i, "nonce", sentNonce, "blk", sentBlockNumber)
-		tx := SendHandleKLAYTransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
+		tx := SendHandleVINITransfer(info.b, acc, to, transferAmount, sentNonce, sentBlockNumber, t)
 		info.sim.Commit()
 		assert.Error(t, bind.CheckWaitMined(info.sim, tx))
 	}

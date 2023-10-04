@@ -22,7 +22,7 @@ They mostly act like normal Klaytn blockchains but has additional features to co
 They can be used as separate public/private blockchains or child chains of a Klaytn chain (or another Service Chain).
 The followings describe main features of Service chain.
   - Anchoring block data of Service Chain
-  - Value Transfer (KLAY, KCT)
+  - Value Transfer (VINI, KCT)
   - Various bridge contract configurations
   - Support high availability
 
@@ -36,16 +36,16 @@ Both of a Klaytn chain and a Service Chain can be a parent chain, but only a Ser
 The block data of a child chain can be anchored to the bridge contract of MainBridge with the chain data anchoring transaction.
 
 Unlike the block data anchoring, user data transfer is bi-directional.
-For example, users can transfer KLAY of Klaytn main chain to an address of a Service Chain or vice versa.
+For example, users can transfer VINI of Klaytn main chain to an address of a Service Chain or vice versa.
 This kind of inter-chain operation requires read/write ability on both chains but does not use MainBridge functions in the process.
 Instead of the MainBridge, the SubBridge in the child chain directly calls read/write operations to the parent chain node through RPC (In the basic configuration, the parent chain node is the same with the MainBridge enabled node).
 Of course, the accounts of both chains should be registered on the SubBridge to generate transactions.
-Following is the process of the KLAY transfer from Klaytn main chain to a Service Chain.
-1. A user executes the inter-chain operation by sending a transaction with KLAY to the bridge contract of Klaytn main chain.
-2. The bridge contract keeps KLAY on its account and creates an event for the inter-chain request.
+Following is the process of the VINI transfer from Klaytn main chain to a Service Chain.
+1. A user executes the inter-chain operation by sending a transaction with VINI to the bridge contract of Klaytn main chain.
+2. The bridge contract keeps VINI on its account and creates an event for the inter-chain request.
 3. The SubBridge subscribes the event log on the main chain node through RPC.
 4. The SubBridge generates a transaction on the child chain node to the bridge contract of the SubBridge.
-5. Finally, The bridge contract mints (or uses its KLAY) and sends KLAY to the target address.
+5. Finally, The bridge contract mints (or uses its VINI) and sends VINI to the target address.
 
 
 Source Files

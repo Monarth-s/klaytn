@@ -139,7 +139,7 @@ func TestNotifications(t *testing.T) {
 	val := 12345
 	request := map[string]interface{}{
 		"id":      1,
-		"method":  "klay_subscribe",
+		"method":  "vini_subscribe",
 		"version": "2.0",
 		"params":  []interface{}{"someSubscription", n, val},
 	}

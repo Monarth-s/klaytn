@@ -1,5 +1,5 @@
 {
-  "_comment": "This test json file is a legacy transaction that sends KLAY to an EOA",
+  "_comment": "This test json file is a legacy transaction that sends VINI to an EOA",
   "context": {
     "blockscore": "0x1",
     "number": "37784",

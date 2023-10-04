@@ -402,7 +402,7 @@ func TestClientNotificationStorm(t *testing.T) {
 				return
 			}
 			var r int
-			err := client.CallContext(ctx, &r, "klay_echo", i)
+			err := client.CallContext(ctx, &r, "vini_echo", i)
 			if err != nil {
 				if !wantError {
 					t.Fatalf("(%d/%d) call error: %v", i, count, err)

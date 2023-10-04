@@ -1138,7 +1138,7 @@ func TestAccountUpdate(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).SetUint64(params.KLAY)
+		amount := new(big.Int).SetUint64(params.VINI)
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1334,7 +1334,7 @@ func TestFeeDelegatedAccountUpdate(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1464,7 +1464,7 @@ func TestFeeDelegatedAccountUpdateWithRatio(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 
@@ -1607,7 +1607,7 @@ func TestMultisigScenario(t *testing.T) {
 	{
 		var txs types.Transactions
 
-		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.KLAY))
+		amount := new(big.Int).Mul(big.NewInt(3000), new(big.Int).SetUint64(params.VINI))
 		tx := types.NewTransaction(reservoir.Nonce,
 			anon.Addr, amount, gasLimit, gasPrice, []byte{})
 

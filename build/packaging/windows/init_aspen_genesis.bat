@@ -5,8 +5,8 @@ set CONF=%HOME%\conf
 
 call %CONF%\klay-conf.cmd
 
-IF NOT EXIST %KLAY_HOME% (
-    mkdir %KLAY_HOME%
+IF NOT EXIST %VINI_HOME% (
+    mkdir %VINI_HOME%
 )
 
 IF NOT EXIST %DATA_DIR% (

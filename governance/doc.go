@@ -16,7 +16,7 @@
 
 /*
 Package governance contains functions and variables used for voting and reflecting vote results in Klaytn.
-In Klaytn, various settings such as the amount of KLAY minted as a block reward can be changed by using governance vote.
+In Klaytn, various settings such as the amount of VINI minted as a block reward can be changed by using governance vote.
 These votes can be casted by nodes of Governance Council and detailed introduction can be found at https://docs.klaytn.com/klaytn/design/governance
 
 How to cast a vote

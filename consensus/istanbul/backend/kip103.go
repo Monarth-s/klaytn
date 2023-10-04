@@ -170,9 +170,9 @@ func RebalanceTreasury(state *state.StateDB, chain consensus.ChainReader, header
 	for addr := range result.Retired {
 		state.SetBalance(addr, big.NewInt(0))
 	}
-	// Execution 2) Distribute KLAY to all newbies
+	// Execution 2) Distribute VINI to all newbies
 	for addr, balance := range result.Newbie {
-		// if newbie has KLAY before the allocation, it will be burnt
+		// if newbie has VINI before the allocation, it will be burnt
 		currentBalance := state.GetBalance(addr)
 		result.Burnt.Add(result.Burnt, currentBalance)
 

@@ -48,7 +48,7 @@ func newDatadogTracer() *DatadogTracer {
 	service := os.Getenv("DD_SERVICE")
 
 	klaytnResponse := false
-	if v := os.Getenv("DD_KLAYTN_RPC_RESPONSE"); v != "" {
+	if v := os.Getenv("DD_VINITN_RPC_RESPONSE"); v != "" {
 		var err error
 		klaytnResponse, err = strconv.ParseBool(v)
 		if err != nil {

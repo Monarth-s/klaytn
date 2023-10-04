@@ -52,6 +52,6 @@ set MULTICHANNEL=1
 REM Raw options e.g) "--txpool.nolocals"
 set ADDITIONAL=""
 
-set KLAY_HOME=%homepath%\.ken
+set VINI_HOME=%homepath%\.ken
 
-set DATA_DIR=%KLAY_HOME%\data
+set DATA_DIR=%VINI_HOME%\data

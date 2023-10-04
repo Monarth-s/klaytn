@@ -5,7 +5,7 @@
 # To checkout migration status, `tail -f logs-body.out`
 
 # BIN file
-KLAYTN_BIN=~/klaytn/bin/ken
+VINITN_BIN=~/klaytn/bin/ken
 
 # Source DB
 SRC_DB_TYPE=LevelDB     # one of "LevelDB", "BadgerDB", "MemoryDB", "DynamoDBS3"
@@ -27,7 +27,7 @@ export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 
 # call db migration
-$KLAYTN_BIN db-migration start \
+$VINITN_BIN db-migration start \
   --dbtype $SRC_DB_TYPE \
   --datadir $SRC_DB_DIR  \
   --db.num-statetrie-shards $SRC_DB_SHARDS \

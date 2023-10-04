@@ -30,7 +30,7 @@ import (
 	"github.com/Monarth-s/klaytn/rlp"
 )
 
-// TxInternalDataValueTransfer represents a transaction transferring KLAY.
+// TxInternalDataValueTransfer represents a transaction transferring VINI.
 // No more attributes required than attributes in TxInternalDataCommon.
 type TxInternalDataValueTransfer struct {
 	AccountNonce uint64

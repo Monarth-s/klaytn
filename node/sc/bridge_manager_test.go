@@ -150,9 +150,9 @@ func TestBridgeManager(t *testing.T) {
 
 	// Create Simulated backend
 	alloc := blockchain.GenesisAlloc{
-		alice.From:            {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		alice.From:            {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -175,7 +175,7 @@ func TestBridgeManager(t *testing.T) {
 	assert.NoError(t, err)
 
 	testToken := big.NewInt(123)
-	testKLAY := big.NewInt(321)
+	testVINI := big.NewInt(321)
 
 	// 1. Deploy Bridge Contract
 	addr, err := bridgeManager.DeployBridgeTest(sim, 10000, false)
@@ -223,16 +223,16 @@ func TestBridgeManager(t *testing.T) {
 	assert.Equal(t, cNftAddr, nftAddr)
 
 	balance, _ := sim.BalanceAt(context.Background(), pAuth.From, nil)
-	t.Logf("auth(%v) KLAY balance : %v\n", pAuth.From.String(), balance)
+	t.Logf("auth(%v) VINI balance : %v\n", pAuth.From.String(), balance)
 
 	balance, _ = sim.BalanceAt(context.Background(), cAuth.From, nil)
-	t.Logf("auth2(%v) KLAY balance : %v\n", cAuth.From.String(), balance)
+	t.Logf("auth2(%v) VINI balance : %v\n", cAuth.From.String(), balance)
 
 	balance, _ = sim.BalanceAt(context.Background(), alice.From, nil)
-	t.Logf("auth3(%v) KLAY balance : %v\n", alice.From.String(), balance)
+	t.Logf("auth3(%v) VINI balance : %v\n", alice.From.String(), balance)
 
 	balance, _ = sim.BalanceAt(context.Background(), bob.From, nil)
-	t.Logf("auth4(%v) KLAY balance : %v\n", bob.From.String(), balance)
+	t.Logf("auth4(%v) VINI balance : %v\n", bob.From.String(), balance)
 
 	// 4. Subscribe Bridge Contract
 	bridgeManager.SubscribeEvent(addr)
@@ -292,11 +292,11 @@ func TestBridgeManager(t *testing.T) {
 		CheckReceipt(sim, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 	}
 
-	// 8. RequestKLAYTransfer from Alice to Bob
+	// 8. RequestVINITransfer from Alice to Bob
 	{
-		tx, err = bridge.RequestKLAYTransfer(&bind.TransactOpts{From: alice.From, Signer: alice.Signer, Value: testKLAY, GasLimit: testGasLimit}, bob.From, testKLAY, nil)
+		tx, err = bridge.RequestVINITransfer(&bind.TransactOpts{From: alice.From, Signer: alice.Signer, Value: testVINI, GasLimit: testGasLimit}, bob.From, testVINI, nil)
 		assert.NoError(t, err)
-		t.Log("DepositKLAY Transaction", tx.Hash().Hex())
+		t.Log("DepositVINI Transaction", tx.Hash().Hex())
 
 		sim.Commit() // block
 
@@ -329,11 +329,11 @@ func TestBridgeManager(t *testing.T) {
 		assert.Equal(t, testToken.String(), balance.String())
 	}
 
-	// 11. Check KLAY balance
+	// 11. Check VINI balance
 	{
 		balance, err = sim.BalanceAt(context.Background(), bob.From, nil)
 		assert.Equal(t, nil, err)
-		assert.Equal(t, testKLAY.String(), balance.String())
+		assert.Equal(t, testVINI.String(), balance.String())
 	}
 
 	// 12. Check NFT owner sent by RequestValueTransfer()
@@ -379,9 +379,9 @@ func TestBridgeManagerERC721_notSupportURI(t *testing.T) {
 
 	// Create Simulated backend
 	alloc := blockchain.GenesisAlloc{
-		alice.From:            {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		alice.From:            {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -516,7 +516,7 @@ func TestBridgeManagerERC721_notSupportURI(t *testing.T) {
 	bridgeManager.Stop()
 }
 
-// TestBridgeManagerWithFee tests the KLAY/ERC20 transfer with fee.
+// TestBridgeManagerWithFee tests the VINI/ERC20 transfer with fee.
 func TestBridgeManagerWithFee(t *testing.T) {
 	tempDir, err := ioutil.TempDir(os.TempDir(), "sc")
 	assert.NoError(t, err)
@@ -574,8 +574,8 @@ func TestBridgeManagerWithFee(t *testing.T) {
 	bridgeManager, err := NewBridgeManager(sc)
 
 	testToken := int64(100000)
-	testKLAY := int64(100000)
-	KLAYFee := int64(500)
+	testVINI := int64(100000)
+	VINIFee := int64(500)
 	ERC20Fee := int64(500)
 
 	// 1. Deploy Bridge Contract
@@ -608,7 +608,7 @@ func TestBridgeManagerWithFee(t *testing.T) {
 	}
 
 	{
-		fee, err := pBridge.FeeOfKLAY(nil)
+		fee, err := pBridge.FeeOfVINI(nil)
 		assert.Equal(t, nil, err)
 		assert.Equal(t, big.NewInt(0).String(), fee.String())
 	}
@@ -623,14 +623,14 @@ func TestBridgeManagerWithFee(t *testing.T) {
 	assert.NoError(t, err)
 	_, err = pBridge.RegisterOperator(&bind.TransactOpts{From: cAuth.From, Signer: cAuth.Signer, GasLimit: testGasLimit}, cAuth.From)
 	assert.NoError(t, err)
-	pBridge.SetKLAYFee(&bind.TransactOpts{From: cAuth.From, Signer: cAuth.Signer, GasLimit: testGasLimit}, big.NewInt(KLAYFee), cn)
+	pBridge.SetVINIFee(&bind.TransactOpts{From: cAuth.From, Signer: cAuth.Signer, GasLimit: testGasLimit}, big.NewInt(VINIFee), cn)
 	pBridge.SetERC20Fee(&bind.TransactOpts{From: cAuth.From, Signer: cAuth.Signer, GasLimit: testGasLimit}, tokenAddr, big.NewInt(ERC20Fee), cn+1)
 	sim.Commit() // block
 
 	{
-		fee, err := pBridge.FeeOfKLAY(nil)
+		fee, err := pBridge.FeeOfVINI(nil)
 		assert.Equal(t, nil, err)
-		assert.Equal(t, KLAYFee, fee.Int64())
+		assert.Equal(t, VINIFee, fee.Int64())
 	}
 
 	{
@@ -651,10 +651,10 @@ func TestBridgeManagerWithFee(t *testing.T) {
 	assert.Equal(t, cTokenAddr, tokenAddr)
 
 	balance, _ := sim.BalanceAt(context.Background(), Alice.From, nil)
-	t.Logf("Alice(%v) KLAY balance : %v\n", Alice.From.String(), balance)
+	t.Logf("Alice(%v) VINI balance : %v\n", Alice.From.String(), balance)
 
 	balance, _ = sim.BalanceAt(context.Background(), Bob.From, nil)
-	t.Logf("Bob(%v) KLAY balance : %v\n", Bob.From.String(), balance)
+	t.Logf("Bob(%v) VINI balance : %v\n", Bob.From.String(), balance)
 
 	// 4. Subscribe Bridge Contract
 	bridgeManager.SubscribeEvent(pBridgeAddr)
@@ -821,22 +821,22 @@ func TestBridgeManagerWithFee(t *testing.T) {
 		CheckReceipt(sim, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 	}
 
-	// 9-1. Request KLAY transfer from Alice to Bob with same feeLimit with fee
+	// 9-1. Request VINI transfer from Alice to Bob with same feeLimit with fee
 	{
-		tx, err = pBridge.RequestKLAYTransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testKLAY + KLAYFee), GasLimit: testGasLimit}, Bob.From, big.NewInt(testKLAY), nil)
+		tx, err = pBridge.RequestVINITransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testVINI + VINIFee), GasLimit: testGasLimit}, Bob.From, big.NewInt(testVINI), nil)
 		if err != nil {
-			log.Fatalf("Failed to RequestKLAYTransfer: %v", err)
+			log.Fatalf("Failed to RequestVINITransfer: %v", err)
 		}
-		t.Log("RequestKLAYTransfer Transaction", tx.Hash().Hex())
+		t.Log("RequestVINITransfer Transaction", tx.Hash().Hex())
 
 		sim.Commit() // block
 
 		CheckReceipt(sim, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 	}
 
-	// 9-2. Request KLAY transfer from Alice to Bob with zero feeLimit
+	// 9-2. Request VINI transfer from Alice to Bob with zero feeLimit
 	{
-		tx, err = pBridge.RequestKLAYTransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testKLAY), GasLimit: testGasLimit}, Bob.From, big.NewInt(testKLAY), nil)
+		tx, err = pBridge.RequestVINITransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testVINI), GasLimit: testGasLimit}, Bob.From, big.NewInt(testVINI), nil)
 		assert.Equal(t, nil, err)
 
 		sim.Commit() // block
@@ -844,9 +844,9 @@ func TestBridgeManagerWithFee(t *testing.T) {
 		CheckReceipt(sim, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
 	}
 
-	// 9-3. Request KLAY transfer from Alice to Bob with insufficient feeLimit
+	// 9-3. Request VINI transfer from Alice to Bob with insufficient feeLimit
 	{
-		tx, err = pBridge.RequestKLAYTransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testKLAY + (KLAYFee - 1)), GasLimit: testGasLimit}, Bob.From, big.NewInt(testKLAY), nil)
+		tx, err = pBridge.RequestVINITransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testVINI + (VINIFee - 1)), GasLimit: testGasLimit}, Bob.From, big.NewInt(testVINI), nil)
 		assert.Equal(t, nil, err)
 
 		sim.Commit() // block
@@ -854,9 +854,9 @@ func TestBridgeManagerWithFee(t *testing.T) {
 		CheckReceipt(sim, tx, 1*time.Second, types.ReceiptStatusErrExecutionReverted, t)
 	}
 
-	// 9-4. Request KLAY transfer from Alice to Bob with enough feeLimit
+	// 9-4. Request VINI transfer from Alice to Bob with enough feeLimit
 	{
-		tx, err = pBridge.RequestKLAYTransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testKLAY + (KLAYFee + 1)), GasLimit: testGasLimit}, Bob.From, big.NewInt(testKLAY), nil)
+		tx, err = pBridge.RequestVINITransfer(&bind.TransactOpts{From: Alice.From, Signer: Alice.Signer, Value: big.NewInt(testVINI + (VINIFee + 1)), GasLimit: testGasLimit}, Bob.From, big.NewInt(testVINI), nil)
 		assert.Equal(t, nil, err)
 
 		sim.Commit() // block
@@ -864,11 +864,11 @@ func TestBridgeManagerWithFee(t *testing.T) {
 		CheckReceipt(sim, tx, 1*time.Second, types.ReceiptStatusSuccessful, t)
 	}
 
-	// 9-4. Request KLAY transfer from Alice to Alice through () payable method
+	// 9-4. Request VINI transfer from Alice to Alice through () payable method
 	{
 		nonce, _ := sim.PendingNonceAt(context.Background(), Alice.From)
 		gasPrice, _ := sim.SuggestGasPrice(context.Background())
-		unsignedTx := types.NewTransaction(nonce, pBridgeAddr, big.NewInt(testKLAY+KLAYFee), testGasLimit, gasPrice, []byte{})
+		unsignedTx := types.NewTransaction(nonce, pBridgeAddr, big.NewInt(testVINI+VINIFee), testGasLimit, gasPrice, []byte{})
 
 		chainID, _ := sim.ChainID(context.Background())
 		tx, err = types.SignTx(unsignedTx, types.LatestSignerForChainID(chainID), AliceKey)
@@ -901,19 +901,19 @@ func TestBridgeManagerWithFee(t *testing.T) {
 		assert.Equal(t, ERC20Fee*4, balance.Int64())
 	}
 
-	// 11. Check KLAY balance
+	// 11. Check VINI balance
 	{
 		balance, _ = sim.BalanceAt(context.Background(), Alice.From, nil)
-		t.Log("Alice KLAY balance :", balance)
-		assert.Equal(t, initialValue-(testKLAY+KLAYFee)*2-KLAYFee, balance.Int64())
+		t.Log("Alice VINI balance :", balance)
+		assert.Equal(t, initialValue-(testVINI+VINIFee)*2-VINIFee, balance.Int64())
 
 		balance, _ = sim.BalanceAt(context.Background(), Bob.From, nil)
-		t.Log("Bob KLAY balance :", balance)
-		assert.Equal(t, big.NewInt(testKLAY*2).String(), balance.String())
+		t.Log("Bob VINI balance :", balance)
+		assert.Equal(t, big.NewInt(testVINI*2).String(), balance.String())
 
 		balance, _ = sim.BalanceAt(context.Background(), receiver.From, nil)
-		t.Log("receiver KLAY balance :", balance)
-		assert.Equal(t, KLAYFee*3, balance.Int64())
+		t.Log("receiver VINI balance :", balance)
+		assert.Equal(t, VINIFee*3, balance.Int64())
 	}
 
 	bridgeManager.Stop()
@@ -951,11 +951,11 @@ func TestBasicJournal(t *testing.T) {
 	bacc.cAccount.chainID = big.NewInt(0)
 
 	alloc := blockchain.GenesisAlloc{
-		auth.From:             {Balance: big.NewInt(params.KLAY)},
-		auth2.From:            {Balance: big.NewInt(params.KLAY)},
-		auth4.From:            {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		auth.From:             {Balance: big.NewInt(params.VINI)},
+		auth2.From:            {Balance: big.NewInt(params.VINI)},
+		auth4.From:            {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -1032,11 +1032,11 @@ func TestMethodRestoreBridges(t *testing.T) {
 	bacc.cAccount.chainID = big.NewInt(0)
 
 	alloc := blockchain.GenesisAlloc{
-		auth.From:             {Balance: big.NewInt(params.KLAY)},
-		auth2.From:            {Balance: big.NewInt(params.KLAY)},
-		auth4.From:            {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		auth.From:             {Balance: big.NewInt(params.VINI)},
+		auth2.From:            {Balance: big.NewInt(params.VINI)},
+		auth4.From:            {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -1257,11 +1257,11 @@ func TestErrorDuplicatedSetBridgeInfo(t *testing.T) {
 	bacc.cAccount.chainID = big.NewInt(0)
 
 	alloc := blockchain.GenesisAlloc{
-		auth.From:             {Balance: big.NewInt(params.KLAY)},
-		auth2.From:            {Balance: big.NewInt(params.KLAY)},
-		auth4.From:            {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		auth.From:             {Balance: big.NewInt(params.VINI)},
+		auth2.From:            {Balance: big.NewInt(params.VINI)},
+		auth4.From:            {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -1324,11 +1324,11 @@ func TestScenarioSubUnsub(t *testing.T) {
 	bacc.cAccount.chainID = big.NewInt(0)
 
 	alloc := blockchain.GenesisAlloc{
-		auth.From:             {Balance: big.NewInt(params.KLAY)},
-		auth2.From:            {Balance: big.NewInt(params.KLAY)},
-		auth4.From:            {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		auth.From:             {Balance: big.NewInt(params.VINI)},
+		auth2.From:            {Balance: big.NewInt(params.VINI)},
+		auth4.From:            {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -1430,11 +1430,11 @@ func TestErrorDupSubscription(t *testing.T) {
 	bacc.cAccount.chainID = big.NewInt(0)
 
 	alloc := blockchain.GenesisAlloc{
-		auth.From:             {Balance: big.NewInt(params.KLAY)},
-		auth2.From:            {Balance: big.NewInt(params.KLAY)},
-		auth4.From:            {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		auth.From:             {Balance: big.NewInt(params.VINI)},
+		auth2.From:            {Balance: big.NewInt(params.VINI)},
+		auth4.From:            {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -2022,10 +2022,10 @@ func TestBridgeAliasAPIs(t *testing.T) {
 	bacc.cAccount.chainID = big.NewInt(0)
 
 	alloc := blockchain.GenesisAlloc{
-		alice.From:            {Balance: big.NewInt(params.KLAY)},
-		bob.From:              {Balance: big.NewInt(params.KLAY)},
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		alice.From:            {Balance: big.NewInt(params.VINI)},
+		bob.From:              {Balance: big.NewInt(params.VINI)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -2487,8 +2487,8 @@ func TestBridgeAddressType(t *testing.T) {
 
 	// Create Simulated backend
 	alloc := blockchain.GenesisAlloc{
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()
@@ -2577,7 +2577,7 @@ func TestBridgeAddressType(t *testing.T) {
 	}
 }
 
-// DeployBridgeTest is a test-only function which deploys a bridge contract with some amount of KLAY.
+// DeployBridgeTest is a test-only function which deploys a bridge contract with some amount of VINI.
 func (bm *BridgeManager) DeployBridgeTest(backend *backends.SimulatedBackend, amountOfDeposit int64, local bool) (common.Address, error) {
 	var acc *accountInfo
 
@@ -2677,8 +2677,8 @@ func TestGetBridgeContractBalance(t *testing.T) {
 
 	// Create Simulated backend
 	alloc := blockchain.GenesisAlloc{
-		bacc.pAccount.address: {Balance: big.NewInt(params.KLAY)},
-		bacc.cAccount.address: {Balance: big.NewInt(params.KLAY)},
+		bacc.pAccount.address: {Balance: big.NewInt(params.VINI)},
+		bacc.cAccount.address: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 	defer sim.Close()

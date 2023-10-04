@@ -33,7 +33,7 @@ import (
 	"github.com/Monarth-s/klaytn/rlp"
 )
 
-// TxInternalDataFeeDelegatedValueTransferMemoWithRatio represents a fee-delegated transaction transferring KLAY
+// TxInternalDataFeeDelegatedValueTransferMemoWithRatio represents a fee-delegated transaction transferring VINI
 // with a specified fee ratio between the sender and the fee payer.
 // The ratio is a fee payer's ratio in percentage.
 // For example, if it is 20, 20% of tx fee will be paid by the fee payer.

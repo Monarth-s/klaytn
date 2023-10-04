@@ -19,46 +19,46 @@ pragma solidity 0.5.6;
 import "./BridgeTransfer.sol";
 
 
-contract BridgeTransferKLAY is BridgeTransfer {
-    bool public isLockedKLAY;
+contract BridgeTransferVINI is BridgeTransfer {
+    bool public isLockedVINI;
 
-    event KLAYLocked();
-    event KLAYUnlocked();
+    event VINILocked();
+    event VINIUnlocked();
 
-    modifier lockedKLAY {
-        require(isLockedKLAY == true, "unlocked");
+    modifier lockedVINI {
+        require(isLockedVINI == true, "unlocked");
         _;
     }
 
-    modifier unlockedKLAY {
-        require(isLockedKLAY == false, "locked");
+    modifier unlockedVINI {
+        require(isLockedVINI == false, "locked");
         _;
     }
 
-    // lockKLAY can to prevent request KLAY transferring.
-    function lockKLAY()
+    // lockVINI can to prevent request VINI transferring.
+    function lockVINI()
         external
         onlyOwner
-        unlockedKLAY
+        unlockedVINI
     {
-        isLockedKLAY = true;
+        isLockedVINI = true;
 
-        emit KLAYLocked();
+        emit VINILocked();
     }
 
-    // unlockToken can allow request KLAY transferring.
-    function unlockKLAY()
+    // unlockToken can allow request VINI transferring.
+    function unlockVINI()
         external
         onlyOwner
-        lockedKLAY
+        lockedVINI
     {
-        isLockedKLAY = false;
+        isLockedVINI = false;
 
-        emit KLAYUnlocked();
+        emit VINIUnlocked();
     }
 
-    // handleKLAYTransfer sends the KLAY by the request.
-    function handleKLAYTransfer(
+    // handleVINITransfer sends the VINI by the request.
+    function handleVINITransfer(
         bytes32 _requestTxHash,
         address _from,
         address payable _to,
@@ -83,7 +83,7 @@ contract BridgeTransferKLAY is BridgeTransfer {
 
         emit HandleValueTransfer(
             _requestTxHash,
-            TokenType.KLAY,
+            TokenType.VINI,
             _from,
             _to,
             address(0),
@@ -96,18 +96,18 @@ contract BridgeTransferKLAY is BridgeTransfer {
         _to.transfer(_value);
     }
 
-    // _requestKLAYTransfer requests transfer KLAY to _to on relative chain.
-    function _requestKLAYTransfer(address _to, uint256 _feeLimit,  bytes memory _extraData)
+    // _requestVINITransfer requests transfer VINI to _to on relative chain.
+    function _requestVINITransfer(address _to, uint256 _feeLimit,  bytes memory _extraData)
         internal
-        unlockedKLAY
+        unlockedVINI
     {
         require(isRunning, "stopped bridge");
         require(msg.value > _feeLimit, "insufficient amount");
 
-        uint256 fee = _payKLAYFeeAndRefundChange(_feeLimit);
+        uint256 fee = _payVINIFeeAndRefundChange(_feeLimit);
 
         emit RequestValueTransfer(
-            TokenType.KLAY,
+            TokenType.VINI,
             msg.sender,
             _to,
             address(0),
@@ -119,29 +119,29 @@ contract BridgeTransferKLAY is BridgeTransfer {
         requestNonce++;
     }
 
-    // () requests transfer KLAY to msg.sender address on relative chain.
+    // () requests transfer VINI to msg.sender address on relative chain.
     function () external payable {
-        _requestKLAYTransfer(msg.sender, feeOfKLAY, new bytes(0));
+        _requestVINITransfer(msg.sender, feeOfVINI, new bytes(0));
     }
 
-    // requestKLAYTransfer requests transfer KLAY to _to on relative chain.
-    function requestKLAYTransfer(address _to, uint256 _value, bytes calldata _extraData) external payable {
+    // requestVINITransfer requests transfer VINI to _to on relative chain.
+    function requestVINITransfer(address _to, uint256 _value, bytes calldata _extraData) external payable {
         uint256 feeLimit = msg.value.sub(_value);
-        _requestKLAYTransfer(_to, feeLimit, _extraData);
+        _requestVINITransfer(_to, feeLimit, _extraData);
     }
 
-    // chargeWithoutEvent sends KLAY to this contract without event for increasing
+    // chargeWithoutEvent sends VINI to this contract without event for increasing
     // the withdrawal limit.
     function chargeWithoutEvent() external payable {}
 
-    // setKLAYFee set the fee of KLAY transfer.
-    function setKLAYFee(uint256 _fee, uint64 _requestNonce)
+    // setVINIFee set the fee of VINI transfer.
+    function setVINIFee(uint256 _fee, uint64 _requestNonce)
         external
         onlyOperators
     {
         if (!_voteConfiguration(_requestNonce)) {
             return;
         }
-        _setKLAYFee(_fee);
+        _setVINIFee(_fee);
     }
 }

@@ -44,7 +44,7 @@ const (
 )
 
 const (
-	KLAY uint8 = iota
+	VINI uint8 = iota
 	ERC20
 	ERC721
 )
@@ -66,7 +66,7 @@ var (
 )
 
 var handleVTmethods = map[uint8]string{
-	KLAY:   "handleKLAYTransfer",
+	VINI:   "handleVINITransfer",
 	ERC20:  "handleERC20Transfer",
 	ERC721: "handleERC721Transfer",
 }
@@ -300,7 +300,7 @@ func (bi *BridgeInfo) handleRequestValueTransferEvent(ev IRequestValueTransferEv
 
 	ctpartTokenAddr := bi.GetCounterPartToken(tokenAddr)
 	// TODO-Klaytn-Servicechain Add counterpart token address in requestValueTransferEvent
-	if tokenType != KLAY && ctpartTokenAddr == (common.Address{}) {
+	if tokenType != VINI && ctpartTokenAddr == (common.Address{}) {
 		logger.Warn("Unregistered counter part token address.", "addr", ctpartTokenAddr.Hex())
 		ctTokenAddr, err := bi.counterpartBridge.RegisteredTokens(nil, tokenAddr)
 		if err != nil {
@@ -327,12 +327,12 @@ func (bi *BridgeInfo) handleRequestValueTransferEvent(ev IRequestValueTransferEv
 	var err error
 
 	switch tokenType {
-	case KLAY:
-		handleTx, err = bi.bridge.HandleKLAYTransfer(auth, txHash, from, to, valueOrTokenId, requestNonce, blkNumber, extraData)
+	case VINI:
+		handleTx, err = bi.bridge.HandleVINITransfer(auth, txHash, from, to, valueOrTokenId, requestNonce, blkNumber, extraData)
 		if err != nil {
 			return err
 		}
-		handleValueTransferLog(bi.onChildChain, handleVTmethods[KLAY], handleTx.Hash().String(), requestNonce, from, to, valueOrTokenId)
+		handleValueTransferLog(bi.onChildChain, handleVTmethods[VINI], handleTx.Hash().String(), requestNonce, from, to, valueOrTokenId)
 	case ERC20:
 		handleTx, err = bi.bridge.HandleERC20Transfer(auth, txHash, from, to, ctpartTokenAddr, valueOrTokenId, requestNonce, blkNumber, extraData)
 		if err != nil {
@@ -1161,8 +1161,8 @@ func (bm *BridgeManager) SetERC20Fee(bridgeAddr, tokenAddr common.Address, fee *
 	return tx.Hash(), nil
 }
 
-// SetKLAYFee set the KLAY transfer fee on the bridge contract.
-func (bm *BridgeManager) SetKLAYFee(bridgeAddr common.Address, fee *big.Int) (common.Hash, error) {
+// SetVINIFee set the VINI transfer fee on the bridge contract.
+func (bm *BridgeManager) SetVINIFee(bridgeAddr common.Address, fee *big.Int) (common.Hash, error) {
 	bi, ok := bm.GetBridgeInfo(bridgeAddr)
 	if !ok {
 		return common.Hash{}, ErrNoBridgeInfo
@@ -1177,7 +1177,7 @@ func (bm *BridgeManager) SetKLAYFee(bridgeAddr common.Address, fee *big.Int) (co
 		return common.Hash{}, err
 	}
 
-	tx, err := bi.bridge.SetKLAYFee(auth.GenerateTransactOpts(), fee, rn)
+	tx, err := bi.bridge.SetVINIFee(auth.GenerateTransactOpts(), fee, rn)
 	if err != nil {
 		return common.Hash{}, err
 	}
@@ -1218,14 +1218,14 @@ func (bm *BridgeManager) GetERC20Fee(bridgeAddr, tokenAddr common.Address) (*big
 	return bi.bridge.FeeOfERC20(nil, tokenAddr)
 }
 
-// GetKLAYFee returns the KLAY transfer fee on the bridge contract.
-func (bm *BridgeManager) GetKLAYFee(bridgeAddr common.Address) (*big.Int, error) {
+// GetVINIFee returns the VINI transfer fee on the bridge contract.
+func (bm *BridgeManager) GetVINIFee(bridgeAddr common.Address) (*big.Int, error) {
 	bi, ok := bm.GetBridgeInfo(bridgeAddr)
 	if !ok {
 		return nil, ErrNoBridgeInfo
 	}
 
-	return bi.bridge.FeeOfKLAY(nil)
+	return bi.bridge.FeeOfVINI(nil)
 }
 
 // GetFeeReceiver returns the receiver which can get fee of value transfer request.

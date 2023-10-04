@@ -80,10 +80,10 @@ type operations struct {
 }
 
 var ops = map[uint8]*operations{
-	KLAY: {
-		request:     requestKLAYTransfer,
-		handle:      handleKLAYTransfer,
-		dummyHandle: dummyHandleRequestKLAYTransfer,
+	VINI: {
+		request:     requestVINITransfer,
+		handle:      handleVINITransfer,
+		dummyHandle: dummyHandleRequestVINITransfer,
 	},
 	ERC20: {
 		request:     requestTokenTransfer,
@@ -97,8 +97,8 @@ var ops = map[uint8]*operations{
 	},
 }
 
-// TestBasicKLAYTransferRecovery tests each methods of the value transfer recovery.
-func TestBasicKLAYTransferRecovery(t *testing.T) {
+// TestBasicVINITransferRecovery tests each methods of the value transfer recovery.
+func TestBasicVINITransferRecovery(t *testing.T) {
 	tempDir, err := ioutil.TempDir(os.TempDir(), "sc")
 	assert.NoError(t, err)
 	defer func() {
@@ -110,7 +110,7 @@ func TestBasicKLAYTransferRecovery(t *testing.T) {
 	// 1. Init dummy chain and do some value transfers.
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -148,7 +148,7 @@ func TestBasicKLAYTransferRecovery(t *testing.T) {
 	// 5. Recover pending events
 	info.recoveryCh <- true
 	assert.Equal(t, nil, vtr.recoverPendingEvents())
-	ops[KLAY].dummyHandle(info, info.remoteInfo)
+	ops[VINI].dummyHandle(info, info.remoteInfo)
 
 	// 6. Check empty pending events.
 	err = vtr.updateRecoveryHint()
@@ -164,8 +164,8 @@ func TestBasicKLAYTransferRecovery(t *testing.T) {
 	assert.Equal(t, nil, vtr.Recover()) // nothing to recover
 }
 
-// TestKLAYTransferLongRangeRecovery tests a long block range recovery.
-func TestKLAYTransferLongRangeRecovery(t *testing.T) {
+// TestVINITransferLongRangeRecovery tests a long block range recovery.
+func TestVINITransferLongRangeRecovery(t *testing.T) {
 	tempDir := os.TempDir() + "sc"
 	os.MkdirAll(tempDir, os.ModePerm)
 	oldMaxPendingTxs := maxPendingTxs
@@ -180,7 +180,7 @@ func TestKLAYTransferLongRangeRecovery(t *testing.T) {
 	// 1. Init dummy chain and do some value transfers.
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 			for i := uint64(0); i < filterLogsStride; i++ {
 				info.sim.Commit()
 			}
@@ -326,7 +326,7 @@ func TestMethodRecover(t *testing.T) {
 
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -343,7 +343,7 @@ func TestMethodRecover(t *testing.T) {
 	if err != nil {
 		t.Fatal("fail to recover the value transfer")
 	}
-	ops[KLAY].dummyHandle(info, info.remoteInfo)
+	ops[VINI].dummyHandle(info, info.remoteInfo)
 
 	err = vtr.updateRecoveryHint()
 	if err != nil {
@@ -364,7 +364,7 @@ func TestMethodStop(t *testing.T) {
 
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -401,7 +401,7 @@ func TestFlagVTRecovery(t *testing.T) {
 
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -428,7 +428,7 @@ func TestAlreadyStartedVTRecovery(t *testing.T) {
 	}()
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -456,7 +456,7 @@ func TestScenarioMainChainRecovery(t *testing.T) {
 
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.remoteInfo)
+			ops[VINI].request(info, info.remoteInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -473,7 +473,7 @@ func TestScenarioMainChainRecovery(t *testing.T) {
 	if err != nil {
 		t.Fatal("fail to recover the value transfer")
 	}
-	ops[KLAY].dummyHandle(info, info.localInfo)
+	ops[VINI].dummyHandle(info, info.localInfo)
 
 	err = vtr.updateRecoveryHint()
 	if err != nil {
@@ -494,7 +494,7 @@ func TestScenarioAutomaticRecovery(t *testing.T) {
 
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -512,7 +512,7 @@ func TestScenarioAutomaticRecovery(t *testing.T) {
 		t.Fatal("fail to start the value transfer")
 	}
 	assert.Equal(t, nil, vtr.WaitRunningStatus(true, 5*time.Second))
-	ops[KLAY].dummyHandle(info, info.remoteInfo)
+	ops[VINI].dummyHandle(info, info.remoteInfo)
 
 	err = vtr.updateRecoveryHint()
 	if err != nil {
@@ -535,7 +535,7 @@ func TestMultiOperatorRequestRecovery(t *testing.T) {
 	// 1. Init dummy chain and do some value transfers.
 	info := prepare(t, func(info *testInfo) {
 		for i := 0; i < testTxCount; i++ {
-			ops[KLAY].request(info, info.localInfo)
+			ops[VINI].request(info, info.localInfo)
 		}
 	})
 	defer info.sim.Close()
@@ -594,7 +594,7 @@ func TestMultiOperatorRequestRecovery(t *testing.T) {
 	// 7. Recover pending events
 	info.recoveryCh <- true
 	assert.Equal(t, nil, vtr.recoverPendingEvents())
-	ops[KLAY].dummyHandle(info, info.remoteInfo)
+	ops[VINI].dummyHandle(info, info.remoteInfo)
 
 	// 8. Recover from the other operator (value transfer is not recovered yet).
 	err = vtr.updateRecoveryHint()
@@ -612,7 +612,7 @@ func TestMultiOperatorRequestRecovery(t *testing.T) {
 	assert.Equal(t, testPendingCount, len(vtr.childEvents))
 	assert.Equal(t, nil, vtr.recoverPendingEvents())
 	info.remoteInfo.account = info.localInfo.account // other operator
-	ops[KLAY].dummyHandle(info, info.remoteInfo)
+	ops[VINI].dummyHandle(info, info.remoteInfo)
 
 	// 9. Check results.
 	err = vtr.updateRecoveryHint()
@@ -655,9 +655,9 @@ func prepare(t *testing.T, vtcallback func(*testInfo)) *testInfo {
 
 	// Alloc genesis and create a simulator.
 	alloc := blockchain.GenesisAlloc{
-		cAcc.From:      {Balance: big.NewInt(params.KLAY)},
-		pAcc.From:      {Balance: big.NewInt(params.KLAY)},
-		aliceAuth.From: {Balance: big.NewInt(params.KLAY)},
+		cAcc.From:      {Balance: big.NewInt(params.VINI)},
+		pAcc.From:      {Balance: big.NewInt(params.VINI)},
+		aliceAuth.From: {Balance: big.NewInt(params.VINI)},
 	}
 	sim := backends.NewSimulatedBackend(alloc)
 
@@ -806,7 +806,7 @@ func prepare(t *testing.T, vtcallback func(*testInfo)) *testInfo {
 			t.Log("missing handle value transfer", "nonce", ev.GetRequestNonce())
 		} else {
 			switch ev.GetTokenType() {
-			case KLAY, ERC20, ERC721:
+			case VINI, ERC20, ERC721:
 				break
 			default:
 				t.Errorf("received ev.TokenType is unknown: %v", ev.GetTokenType())
@@ -851,38 +851,38 @@ func prepare(t *testing.T, vtcallback func(*testInfo)) *testInfo {
 	return &info
 }
 
-func requestKLAYTransfer(info *testInfo, bi *BridgeInfo) {
+func requestVINITransfer(info *testInfo, bi *BridgeInfo) {
 	bi.account.Lock()
 	defer bi.account.UnLock()
 
 	opts := bi.account.GenerateTransactOpts()
 	opts.Value = big.NewInt(testAmount)
-	tx, err := bi.bridge.RequestKLAYTransfer(opts, info.aliceAuth.From, big.NewInt(testAmount), nil)
+	tx, err := bi.bridge.RequestVINITransfer(opts, info.aliceAuth.From, big.NewInt(testAmount), nil)
 	if err != nil {
-		log.Fatalf("Failed to RequestKLAYTransfer: %v", err)
+		log.Fatalf("Failed to RequestVINITransfer: %v", err)
 	}
 	info.sim.Commit()
 	assert.Nil(info.t, bind.CheckWaitMined(info.sim, tx))
 }
 
-func handleKLAYTransfer(info *testInfo, bi *BridgeInfo, ev IRequestValueTransferEvent) {
+func handleVINITransfer(info *testInfo, bi *BridgeInfo, ev IRequestValueTransferEvent) {
 	bi.account.Lock()
 	defer bi.account.UnLock()
 
 	assert.Equal(info.t, new(big.Int).SetUint64(testAmount), ev.GetValueOrTokenId())
 	opts := bi.account.GenerateTransactOpts()
-	tx, err := bi.bridge.HandleKLAYTransfer(opts, ev.GetRaw().TxHash, ev.GetFrom(), ev.GetTo(), ev.GetValueOrTokenId(), ev.GetRequestNonce(), ev.GetRaw().BlockNumber, ev.GetExtraData())
+	tx, err := bi.bridge.HandleVINITransfer(opts, ev.GetRaw().TxHash, ev.GetFrom(), ev.GetTo(), ev.GetValueOrTokenId(), ev.GetRequestNonce(), ev.GetRaw().BlockNumber, ev.GetExtraData())
 	if err != nil {
-		log.Fatalf("\tFailed to HandleKLAYTransfer: %v", err)
+		log.Fatalf("\tFailed to HandleVINITransfer: %v", err)
 	}
 	info.sim.Commit()
 	assert.Nil(info.t, bind.CheckWaitMined(info.sim, tx))
 }
 
 // TODO-Klaytn-ServiceChain: use ChildChainEventHandler
-func dummyHandleRequestKLAYTransfer(info *testInfo, bi *BridgeInfo) {
+func dummyHandleRequestVINITransfer(info *testInfo, bi *BridgeInfo) {
 	for _, ev := range bi.GetPendingRequestEvents() {
-		handleKLAYTransfer(info, bi, ev.(RequestValueTransferEvent))
+		handleVINITransfer(info, bi, ev.(RequestValueTransferEvent))
 	}
 	info.sim.Commit()
 }

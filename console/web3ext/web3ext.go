@@ -821,7 +821,7 @@ web3._extend({
 
 const Klay_JS = `
 var blockWithConsensusInfoCall = function (args) {
-    return (web3._extend.utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? "klay_getBlockWithConsensusInfoByHash" : "klay_getBlockWithConsensusInfoByNumber";
+    return (web3._extend.utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? "vini_getBlockWithConsensusInfoByHash" : "vini_getBlockWithConsensusInfoByNumber";
 };
 
 web3._extend({
@@ -829,11 +829,11 @@ web3._extend({
 	methods: [
 		new web3._extend.Method({
 			name: 'clientVersion',
-			call: 'klay_clientVersion',
+			call: 'vini_clientVersion',
 		}),
 		new web3._extend.Method({
 			name: 'getBlockReceipts',
-			call: 'klay_getBlockReceipts',
+			call: 'vini_getBlockReceipts',
 			params: 1,
 			outputFormatter: function(receipts) {
 				var formatted = [];
@@ -845,103 +845,103 @@ web3._extend({
 		}),
 		new web3._extend.Method({
 			name: 'sign',
-			call: 'klay_sign',
+			call: 'vini_sign',
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter, null]
 		}),
 		new web3._extend.Method({
 			name: 'resend',
-			call: 'klay_resend',
+			call: 'vini_resend',
 			params: 3,
 			inputFormatter: [web3._extend.formatters.inputTransactionFormatter, web3._extend.utils.fromDecimal, web3._extend.utils.fromDecimal]
 		}),
 		new web3._extend.Method({
 			name: 'signTransaction',
-			call: 'klay_signTransaction',
+			call: 'vini_signTransaction',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputTransactionFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'signTransactionAsFeePayer',
-			call: 'klay_signTransactionAsFeePayer',
+			call: 'vini_signTransactionAsFeePayer',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputTransactionFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'sendTransactionAsFeePayer',
-			call: 'klay_sendTransactionAsFeePayer',
+			call: 'vini_sendTransactionAsFeePayer',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputTransactionFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getCouncil',
-			call: 'klay_getCouncil',
+			call: 'vini_getCouncil',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getCouncilSize',
-			call: 'klay_getCouncilSize',
+			call: 'vini_getCouncilSize',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getCommittee',
-			call: 'klay_getCommittee',
+			call: 'vini_getCommittee',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getCommitteeSize',
-			call: 'klay_getCommitteeSize',
+			call: 'vini_getCommitteeSize',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getRewards',
-			call: 'klay_getRewards',
+			call: 'vini_getRewards',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter],
 		}),
 		new web3._extend.Method({
 			name: 'getStakingInfo',
-			call: 'klay_getStakingInfo',
+			call: 'vini_getStakingInfo',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getParams',
-			call: 'klay_getParams',
+			call: 'vini_getParams',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getChainConfig',
-			call: 'klay_getChainConfig',
+			call: 'vini_getChainConfig',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter],
 		}),
 		new web3._extend.Method({
 			name: 'accountCreated',
-			call: 'klay_accountCreated'
+			call: 'vini_accountCreated'
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter, web3._extend.formatters.inputDefaultBlockNumberFormatter],
 		}),
 		new web3._extend.Method({
 			name: 'getAccount',
-			call: 'klay_getAccount'
+			call: 'vini_getAccount'
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter, web3._extend.formatters.inputDefaultBlockNumberFormatter],
 		}),
 		new web3._extend.Method({
 			name: 'getHeaderByNumber',
-			call: 'klay_getHeaderByNumber',
+			call: 'vini_getHeaderByNumber',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getHeaderByHash',
-			call: 'klay_getHeaderByHash',
+			call: 'vini_getHeaderByHash',
 			params: 1
 		}),
 		new web3._extend.Method({
@@ -952,110 +952,110 @@ web3._extend({
 		}),
 		new web3._extend.Method({
 			name: 'getBlockWithConsensusInfoRange',
-			call: 'klay_getBlockWithConsensusInfoByNumberRange',
+			call: 'vini_getBlockWithConsensusInfoByNumberRange',
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter, web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'isContractAccount',
-			call: 'klay_isContractAccount',
+			call: 'vini_isContractAccount',
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter, web3._extend.formatters.inputDefaultBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'submitTransaction',
-			call: 'klay_submitTransaction',
+			call: 'vini_submitTransaction',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputTransactionFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getRawTransaction',
-			call: 'klay_getRawTransactionByHash',
+			call: 'vini_getRawTransactionByHash',
 			params: 1
 		}),
 		new web3._extend.Method({
 			name: 'estimateComputationCost',
-			call: 'klay_estimateComputationCost',
+			call: 'vini_estimateComputationCost',
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputCallFormatter, web3._extend.formatters.inputDefaultBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getAccountKey',
-			call: 'klay_getAccountKey',
+			call: 'vini_getAccountKey',
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter, web3._extend.formatters.inputDefaultBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'getRawTransactionFromBlock',
 			call: function(args) {
-				return (web3._extend.utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'klay_getRawTransactionByBlockHashAndIndex' : 'klay_getRawTransactionByBlockNumberAndIndex';
+				return (web3._extend.utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vini_getRawTransactionByBlockHashAndIndex' : 'vini_getRawTransactionByBlockNumberAndIndex';
 			},
 			params: 2,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter, web3._extend.utils.toHex]
 		}),
 		new web3._extend.Method({
 			name: 'isParallelDBWrite',
-			call: 'klay_isParallelDBWrite',
+			call: 'vini_isParallelDBWrite',
 		}),
 		new web3._extend.Method({
 			name: 'isSenderTxHashIndexingEnabled',
-			call: 'klay_isSenderTxHashIndexingEnabled',
+			call: 'vini_isSenderTxHashIndexingEnabled',
 		}),
 		new web3._extend.Method({
 			name: 'getTransactionBySenderTxHash',
-			call: 'klay_getTransactionBySenderTxHash',
+			call: 'vini_getTransactionBySenderTxHash',
 			params: 1
 		}),
 		new web3._extend.Method({
 			name: 'getTransactionReceiptBySenderTxHash',
-			call: 'klay_getTransactionReceiptBySenderTxHash',
+			call: 'vini_getTransactionReceiptBySenderTxHash',
 			params: 1
 		}),
 		new web3._extend.Method({
 			name: 'recoverFromTransaction',
-			call: 'klay_recoverFromTransaction',
+			call: 'vini_recoverFromTransaction',
 			params: 2
 		}),
 		new web3._extend.Method({
 			name: 'recoverFromMessage',
-			call: 'klay_recoverFromMessage',
+			call: 'vini_recoverFromMessage',
 			params: 4
 		}),
 		new web3._extend.Method({
 			name: 'getCypressCredit',
-			call: 'klay_getCypressCredit',
+			call: 'vini_getCypressCredit',
 		}),
 		new web3._extend.Method({
 			name: 'sha3',
-			call: 'klay_sha3',
+			call: 'vini_sha3',
 			params: 1,
 			inputFormatter: [web3._extend.utils.toHex],
 		}),
 		new web3._extend.Method({
 			name: 'forkStatus',
-			call: 'klay_forkStatus',
+			call: 'vini_forkStatus',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
 			name: 'encodeAccountKey',
-			call: 'klay_encodeAccountKey',
+			call: 'vini_encodeAccountKey',
 			params: 1,
 		}),
 		new web3._extend.Method({
 			name: 'decodeAccountKey',
-			call: 'klay_decodeAccountKey',
+			call: 'vini_decodeAccountKey',
 			params: 1,
 		}),
 		new web3._extend.Method({
 			name: 'createAccessList',
-			call: 'klay_createAccessList',
+			call: 'vini_createAccessList',
 			params: 2,
 			inputFormatter: [null, web3._extend.formatters.inputBlockNumberFormatter],
 		}),
 		new web3._extend.Method({
 			name: 'feeHistory',
-			call: 'klay_feeHistory',
+			call: 'vini_feeHistory',
 			params: 3,
 			inputFormatter: [null, web3._extend.formatters.inputBlockNumberFormatter, null]
 		}),
@@ -1063,7 +1063,7 @@ web3._extend({
 	properties: [
 		new web3._extend.Property({
 			name: 'pendingTransactions',
-			getter: 'klay_pendingTransactions',
+			getter: 'vini_pendingTransactions',
 			outputFormatter: function(txs) {
 				var formatted = [];
 				for (var i = 0; i < txs.length; i++) {
@@ -1075,30 +1075,30 @@ web3._extend({
 		}),
 		new web3._extend.Property({
 			name: 'nodeAddress',
-			getter: 'klay_nodeAddress',
+			getter: 'vini_nodeAddress',
 		}),
         new web3._extend.Property({
             name : 'rewardbase',
-            getter: 'klay_rewardbase'
+            getter: 'vini_rewardbase'
         }),
         new web3._extend.Property({
             name : 'gasPrice',
-            getter: 'klay_gasPrice',
+            getter: 'vini_gasPrice',
             outputFormatter: web3._extend.formatters.outputBigNumberFormatter
         }),
         new web3._extend.Property({
             name : 'upperBoundGasPrice',
-            getter: 'klay_upperBoundGasPrice',
+            getter: 'vini_upperBoundGasPrice',
             outputFormatter: web3._extend.formatters.outputBigNumberFormatter
         }),
         new web3._extend.Property({
             name : 'lowerBoundGasPrice',
-            getter: 'klay_lowerBoundGasPrice',
+            getter: 'vini_lowerBoundGasPrice',
             outputFormatter: web3._extend.formatters.outputBigNumberFormatter
         }),
 		new web3._extend.Property({
 			name: 'maxPriorityFeePerGas',
-			getter: 'klay_maxPriorityFeePerGas',
+			getter: 'vini_maxPriorityFeePerGas',
 			outputFormatter: web3._extend.utils.toBigNumber
 		})
 	]
@@ -1429,8 +1429,8 @@ web3._extend({
 			params: 1
 		}),
 		new web3._extend.Method({
-			name: 'setKLAYFee',
-			call: 'subbridge_setKLAYFee',
+			name: 'setVINIFee',
+			call: 'subbridge_setVINIFee',
 			params: 2
 		}),
 		new web3._extend.Method({
@@ -1444,8 +1444,8 @@ web3._extend({
 			params: 2
 		}),
 		new web3._extend.Method({
-			name: 'getKLAYFee',
-			call: 'subbridge_getKLAYFee',
+			name: 'getVINIFee',
+			call: 'subbridge_getVINIFee',
 			params: 1
 		}),
 		new web3._extend.Method({

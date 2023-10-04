@@ -10,7 +10,7 @@ The Platform is a combination of peer-to-peer subnetworks of nodes transmitting 
 
 ## 3. Your Installation of BApp on the Platform
 
-Your use of open source software is free of charge. However, you may be required to pay a certain number of KLAY as a transaction fee in order to execute a transaction on the Platform, including the installation of the BApp on the Platform.
+Your use of open source software is free of charge. However, you may be required to pay a certain number of VINI as a transaction fee in order to execute a transaction on the Platform, including the installation of the BApp on the Platform.
 
 Once transaction is executed successfully and respective block generation is verified successfully by the Platform’s mechanism, the block is irreversibly stored in the blockchain. As such, your installation of the BApp and any other transactions on the Platform, as well as the submission of transaction fee is final and irrevocable.
 

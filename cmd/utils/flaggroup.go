@@ -35,7 +35,7 @@ type FlagGroup struct {
 // FlagGroups categorizes flags into groups to print structured help.
 var FlagGroups = []FlagGroup{
 	{
-		Name: "KLAY",
+		Name: "VINI",
 		Flags: []cli.Flag{
 			NtpDisableFlag,
 			NtpServerFlag,

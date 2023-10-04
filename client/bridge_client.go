@@ -286,10 +286,10 @@ func (ec *Client) BridgeSetERC20Fee(ctx context.Context, bridgeAddr, tokenAddr c
 	return result, err
 }
 
-// BridgeSetKLAYFee can set the KLAY transfer fee.
-func (ec *Client) BridgeSetKLAYFee(ctx context.Context, bridgeAddr common.Address, fee *big.Int) (common.Hash, error) {
+// BridgeSetVINIFee can set the VINI transfer fee.
+func (ec *Client) BridgeSetVINIFee(ctx context.Context, bridgeAddr common.Address, fee *big.Int) (common.Hash, error) {
 	var result common.Hash
-	err := ec.c.CallContext(ctx, &result, "subbridge_setKLAYFee", bridgeAddr, fee)
+	err := ec.c.CallContext(ctx, &result, "subbridge_setVINIFee", bridgeAddr, fee)
 	return result, err
 }
 
@@ -300,10 +300,10 @@ func (ec *Client) BridgeGetERC20Fee(ctx context.Context, bridgeAddr, tokenAddr c
 	return (*big.Int)(&result), err
 }
 
-// BridgeGetKLAYFee returns the KLAY transfer fee.
-func (ec *Client) BridgeGetKLAYFee(ctx context.Context, bridgeAddr common.Address) (*big.Int, error) {
+// BridgeGetVINIFee returns the VINI transfer fee.
+func (ec *Client) BridgeGetVINIFee(ctx context.Context, bridgeAddr common.Address) (*big.Int, error) {
 	var result hexutil.Big
-	err := ec.c.CallContext(ctx, &result, "subbridge_getKLAYFee", bridgeAddr)
+	err := ec.c.CallContext(ctx, &result, "subbridge_getVINIFee", bridgeAddr)
 	return (*big.Int)(&result), err
 }
 
