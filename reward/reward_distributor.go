@@ -192,7 +192,7 @@ func CalcRewardParamBlock(num, epoch uint64, rules params.Rules) uint64 {
 }
 
 // GetBlockReward returns the actual reward amounts paid in this block
-// Used in vini_getReward RPC API
+// Used in klay_getReward RPC API
 func GetBlockReward(header *types.Header, rules params.Rules, pset *params.GovParamSet) (*RewardSpec, error) {
 	var spec *RewardSpec
 	var err error

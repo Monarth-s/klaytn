@@ -39,7 +39,7 @@ func (c KlayStats) Host() string {
 }
 
 func (c KlayStats) String() string {
-	tmpl, err := template.New("vini_stats").Parse(klayStatsTemplate)
+	tmpl, err := template.New("klay_stats").Parse(klayStatsTemplate)
 	if err != nil {
 		fmt.Printf("Failed to parse template, %v", err)
 		return ""

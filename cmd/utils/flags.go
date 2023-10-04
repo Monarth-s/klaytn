@@ -824,7 +824,7 @@ var (
 	}
 	RPCGlobalGasCap = &cli.Uint64Flag{
 		Name:     "rpc.gascap",
-		Usage:    "Sets a cap on gas that can be used in vini_call/estimateGas",
+		Usage:    "Sets a cap on gas that can be used in klay_call/estimateGas",
 		Aliases:  []string{"http-rpc.gascap"},
 		EnvVars:  []string{"VINITN_RPC_GASCAP"},
 		Category: "API AND CONSOLE",

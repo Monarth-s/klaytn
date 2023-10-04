@@ -123,7 +123,7 @@ func (api *PublicFilterAPI) timeoutLoop() {
 // as transactions enter the pending state.
 //
 // It is part of the filter package because this filter can be used through the
-// `vini_getFilterChanges` polling method that is also used for log filters.
+// `klay_getFilterChanges` polling method that is also used for log filters.
 func (api *PublicFilterAPI) NewPendingTransactionFilter() rpc.ID {
 	var (
 		pendingTxs   = make(chan []common.Hash)

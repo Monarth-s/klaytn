@@ -30,7 +30,7 @@ func init() {
 }
 
 func newTestRocksDB() (Database, func(), string) {
-	dirName, err := ioutil.TempDir(os.TempDir(), "vini_rocksdb_test_")
+	dirName, err := ioutil.TempDir(os.TempDir(), "klay_rocksdb_test_")
 	if err != nil {
 		panic("failed to create test file: " + err.Error())
 	}
