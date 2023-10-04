@@ -23,7 +23,7 @@ package web3ext
 var Modules = map[string]string{
 	"admin":            Admin_JS,
 	"debug":            Debug_JS,
-	"klay":             Klay_JS,
+	"vini":             Vini_JS,
 	"net":              Net_JS,
 	"personal":         Personal_JS,
 	"rpc":              RPC_JS,
@@ -819,7 +819,7 @@ web3._extend({
 });
 `
 
-const Klay_JS = `
+const Vini_JS = `
 var blockWithConsensusInfoCall = function (args) {
     return (web3._extend.utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? "vini_getBlockWithConsensusInfoByHash" : "vini_getBlockWithConsensusInfoByNumber";
 };
